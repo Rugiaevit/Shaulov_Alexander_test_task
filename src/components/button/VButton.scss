@@ -1,0 +1,64 @@
+@use '@/styles/variables.scss' as *;
+@use '@/styles/mixins.scss' as ms;
+@use '@/styles/function.scss' as *;
+
+.btn {
+  padding: rem(16) rem(24);
+  border-radius: rem(10);
+  cursor: pointer;
+  height: auto;
+  transition: all 0.2s ease;
+
+  width: auto;
+  white-space: nowrap;
+  min-width: 0;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 1.3; // 130% = 1.3
+  font-size: clamp(rem(14), 2.5vw, rem(16));
+  font-weight: 600;
+  background-color: transparent;
+  border: 1px solid $color-border-dark;
+
+  &--primary {
+    @include ms.button($color-primary, $color-text-light, $color-primary);
+
+    &:hover {
+      background-color: $color-success;
+      color: $color-text-dark;
+      border-color: $color-success;
+    }
+
+    &:active {
+      background-color: $color-success-dark;
+      color: $color-text-dark;
+      border-color: $color-success-dark;
+    }
+  }
+
+  &--secondary {
+    @include ms.button($color-bg-light, $color-text-dark, $color-border-medium);
+
+    &:hover {
+      border-color: $color-border-dark;
+    }
+
+    &:active {
+      border-color: $color-success-dark;
+    }
+  }
+
+  &--accent {
+    @include ms.button($color-accent, $color-text-dark, $color-accent);
+
+    &:hover {
+      background-color: $color-success;
+      border-color: $color-success;
+    }
+
+    &:active {
+      background-color: $color-success-dark;
+      border-color: $color-success-dark;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@use '@/styles/variables.scss' as *;
+@use '@/styles/function.scss' as *;
+
+.input-wrapper {
+  padding: rem(16) rem(24);
+  border-radius: rem(10);
+  width: 100%;
+  height: auto;
+  // max-width: calc(rem(300) - (rem(24) + rem(24) + rem(2)));
+  border: rem(1) solid $color-border-light;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  background-color: $color-bg-main;
+  cursor: text;
+
+  &:focus-within {
+    background-color: $color-bg-light-hover;
+
+    svg path {
+      stroke: $color-text-dark;
+    }
+  }
+}
+
+.input {
+  font-size: clamp(rem(14), 4vw, rem(16));
+  font-weight: 500;
+  line-height: 1.5;
+  border: none;
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+}

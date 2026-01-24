@@ -1,0 +1,68 @@
+@use '@/styles/variables.scss' as *;
+@use '@/styles/function.scss' as *;
+
+.select {
+  position: relative;
+  width: 100%;
+  // max-width: rem(300);
+  cursor: pointer;
+
+  &--trigger {
+    padding: rem(16) rem(24);
+    border-radius: rem(10);
+    height: auto;
+    border: 1px solid $color-border-light;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: clamp(rem(14), 4vw, rem(16));
+    font-weight: 500;
+    line-height: 1.3;
+    background-color: $color-bg-main;
+    color: #55555c;
+    transition: all 0.2s ease;
+
+    /* Кастомная стрелка */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0.53009 0.530563L6.53539 6.53056L12.5301 0.530563' stroke='%2355555C' stroke-width='1.5' stroke-miterlimit='10'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right rem(12) center;
+    background-size: rem(14) rem(8);
+
+    &.is-placeholder {
+      opacity: 0.9;
+    }
+  }
+
+  &--options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: rem(4);
+    padding: 0;
+    list-style: none;
+    background: $color-bg-main;
+    border: 1px solid $color-border-light;
+    border-radius: rem(10);
+    max-height: rem(200);
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  &--option {
+    padding: rem(8) rem(16);
+    cursor: pointer;
+    color: $color-text-dark;
+    font-size: clamp(rem(14), 4vw, rem(16));
+    font-weight: 500;
+    line-height: 1.3;
+
+    &:hover {
+      background-color: $color-bg-light-hover;
+    }
+  }
+}
+
+.is-selected {
+  background-color: $color-bg-light-hover;
+}

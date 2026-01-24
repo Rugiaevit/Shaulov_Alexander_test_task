@@ -1,0 +1,25 @@
+@use './function.scss' as *;
+
+// --------------Миксин для media запросов---------------
+@mixin respond-to($breakpoint) {
+  // проверка $breakpoints
+  // map.has-key - аналог Object.hasOwn(obj, key) из JS,
+  @if map.has-key($breakpoints, $breakpoint) {
+    // проверка прошла
+    // получить значение из map (встроенный тип данных ассоциативный массив)
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      // вставка из @include
+      @content;
+    }
+  } @else {
+    // Проверка не прошла
+    @warn "Неизвестный брейкпоинт: #{$breakpoint}";
+  }
+}
+//------------------------------------------------------
+
+@mixin button($bg, $text-color, $border-color) {
+  background: $bg;
+  color: $text-color;
+  border-color: $border-color;
+}

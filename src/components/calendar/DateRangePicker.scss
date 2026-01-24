@@ -1,0 +1,20 @@
+@use '@/styles/variables.scss' as *;
+@use '@/styles/function.scss' as *;
+
+.calendar-input-wrapper {
+  padding: rem(16) rem(24);
+  border-radius: rem(10);
+  width: 100%;
+  height: auto;
+  border: rem(1) solid $color-border-light;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  background-color: $color-bg-main;
+  cursor: auto;
+
+  &:focus-within {
+    background-color: $color-bg-light-hover;
+  }
+}
