@@ -31,19 +31,19 @@ function selectOption(option) {
 </script>
 
 <template>
-  <div class="custom-select" :class="{ 'is-open': isOpen }">
-    <div class="select-trigger" @click="isOpen = !isOpen">
-      <span class="select-value">
+  <div class="custom-select-pagination" :class="{ 'is-open': isOpen }">
+    <div class="select-pagination-trigger" @click="isOpen = !isOpen">
+      <span class="select-pagination-value">
         {{ selectedLabel || placeholder }}
       </span>
-      <span class="select-arrow"><IconArrowSelect /></span>
+      <span class="select-pagination-arrow"><IconArrowSelect /></span>
     </div>
 
-    <ul v-show="isOpen" class="select-dropdown">
+    <ul v-show="isOpen" class="select-pagination-dropdown">
       <li
         v-for="(option, index) in options"
         :key="index"
-        class="select-option"
+        class="select-pagination-option"
         :class="{ 'is-selected': option.value === props.modelValue }"
         @click="selectOption(option)"
       >
