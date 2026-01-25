@@ -4,7 +4,7 @@
 
 .calendar-input-wrapper {
   @include ms.flex-row-space-between();
-  border-radius: rem(10);
+  border-radius: 10px;
   width: 100%;
   max-height: 56px;
   border: rem(1) solid $color-border-light;

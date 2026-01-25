@@ -112,3 +112,59 @@
     }
   }
 }
+
+/* Адаптация flatpickr для мобильных — особенно в rangeMode */
+@media (max-width: 768px) {
+  /* Основной контейнер календаря */
+  .flatpickr-calendar.rangeMode {
+    width: 95vw !important;
+    max-width: 380px !important; /* чуть меньше, чем у большинства телефонов */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+  }
+
+  /* Внутренний контейнер месяцев — делаем колонки */
+  .flatpickr-months {
+    display: flex;
+    flex-direction: column !important; /* ← КЛЮЧЕВОЕ: месяцы один под другим */
+    gap: 8px;
+  }
+
+  /* Убираем лишние отступы */
+  .flatpickr-innerContainer,
+  .flatpickr-rContainer {
+    padding: 0 4px !important;
+  }
+
+  /* Ячейки дней — уменьшаем */
+  .flatpickr-day {
+    padding: 6px 0 !important;
+    height: 32px !important;
+    line-height: 1.2 !important;
+    font-size: 14px !important;
+    min-width: 30px !important;
+    margin: 0 1px !important;
+  }
+
+  /* Заголовок месяца */
+  .flatpickr-current-month {
+    font-size: 16px !important;
+    padding: 4px 0 !important;
+  }
+
+  /* Недели */
+  .flatpickr-weekday {
+    font-size: 12px !important;
+    padding: 6px 0 !important;
+  }
+
+  /* Стрелки навигации — делаем компактнее */
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    width: 28px !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    font-size: 16px !important;
+  }
+}

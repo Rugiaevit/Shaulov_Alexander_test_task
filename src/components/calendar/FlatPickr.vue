@@ -1,5 +1,6 @@
 <script>
 // бибилотека Flatpickr
+// npm uninstall flatpickr vue-flatpickr-component
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
 import { Russian } from 'flatpickr/dist/l10n/ru.js'

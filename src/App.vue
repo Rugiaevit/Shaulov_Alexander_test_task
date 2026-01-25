@@ -28,7 +28,7 @@ const currentPage = ref(1)
   flex-direction: column;
   gap: 24px;
   background-color: $color-bg-main;
-  border-radius: rem(16);
+  border-radius: 16px;
   padding: rem(24);
   max-width: rem(1632);
   margin: 0 auto;

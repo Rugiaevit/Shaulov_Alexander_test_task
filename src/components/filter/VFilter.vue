@@ -2,8 +2,11 @@
 import { ref } from 'vue'
 import VSelect from '../select/VSelect.vue'
 
-import DateRangePicker from '../calendar/DateRangePicker.vue'
+// import DateRangePicker from '../calendar/DateRangePicker.vue'
+import DateRangePicker from '../calendar2/VCalendar.vue'
+
 const selectedRange = ref([])
+// const selectedRange = ref(null)
 
 const federalDistricts = ref([
   { value: '1', label: 'federal district 1' },

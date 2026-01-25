@@ -13,7 +13,7 @@
   &--trigger {
     @include ms.flex-row-space-between();
     padding: rem(10) rem(16);
-    border-radius: rem(10);
+    border-radius: 10px;
     height: auto;
     border: 1px solid $color-border-light;
     font-size: clamp(rem(14), 4vw, rem(16));
@@ -44,7 +44,7 @@
     list-style: none;
     background: $color-bg-main;
     border: 1px solid $color-border-light;
-    border-radius: rem(10);
+    border-radius: 10px;
     max-height: rem(200);
     overflow-y: auto;
     z-index: 1000;

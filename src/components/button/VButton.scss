@@ -4,7 +4,7 @@
 
 .btn {
   padding: rem(16) rem(24);
-  border-radius: rem(10);
+  border-radius: 10px;
   cursor: pointer;
   height: auto;
   flex-shrink: 0; // Отмена сжатия кнопки во flex-box

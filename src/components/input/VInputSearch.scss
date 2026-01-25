@@ -4,7 +4,7 @@
 .input-wrapper {
   @include ms.flex-row-space-between();
   padding: rem(16) rem(24);
-  border-radius: rem(10);
+  border-radius: 10px;
   width: 100%;
   height: auto;
   // max-width: calc(rem(300) - (rem(24) + rem(24) + rem(2)));
