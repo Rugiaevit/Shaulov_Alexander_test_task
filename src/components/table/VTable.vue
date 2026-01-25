@@ -1,13 +1,41 @@
 <script setup>
 import { ref, computed } from 'vue'
+import IconArrowBot from '../icons/VIconArrowBot.vue'
+import IconArrowTop from '../icons/VIconArrowTop.vue'
+import Bubble from '@/components/bubble/VBubble.vue'
 
 // Исходные данные
-const shools = [
-  { region: 'Москва', name: 'Школа №1', adres: 'ул. Ленина, 1', lvl: 'Среднее' },
-  { region: 'СПб', name: 'Гимназия №5', adres: 'Невский пр., 10', lvl: 'Основное' },
-  { region: 'Казань', name: 'Лицей №2', adres: 'пр. Победы, 5', lvl: 'Среднее' },
-  { region: 'Екатеринбург', name: 'Школа №10', adres: 'ул. Карла Либкнехта, 20', lvl: 'Начальное' },
-  { region: 'Новосибирск', name: 'Школа №7', adres: 'ул. Советская, 15', lvl: 'Среднее' },
+const schools = [
+  {
+    region: 'Белгородская область',
+    name: 'МБОУ Средняя общеобразовательная школа №2',
+    adres: 'ул. Николая Гондатти, д. 13 ул. Н. Гондатти 13 ; ул. Н. Зелинского 22',
+    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
+  },
+  {
+    region: 'Брянская область',
+    name: 'МБОУ Основная общеобразовательная школа №3',
+    adres: 'с. Засечное, ул. Изумрудная 8А',
+    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
+  },
+  {
+    region: 'Владимирская область',
+    name: 'МБОУ СОШ №7 ',
+    adres: 'ул. Строителей, д.2а ул. Домостроителей 2а, ул. Камчатская, 154',
+    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
+  },
+  {
+    region: 'Воронежская область',
+    name: 'МБОУ Средняя общеобразовательная школа №5',
+    adres: 'Большая Очаковская улица, дом 42, корпус 2',
+    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
+  },
+  {
+    region: 'Ивановская область',
+    name: 'МБУДО Детская школа искусств',
+    adres: 'бул. Измайловский, 4',
+    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
+  },
 ]
 
 // Состояние сортировки
@@ -15,10 +43,10 @@ const sortBy = ref(null) // имя поля: 'region', 'name', и т.д.
 const sortOrder = ref('asc') // 'asc' | 'desc'
 
 // Вычисляемый отсортированный список
-const sortedShools = computed(() => {
-  if (!sortBy.value) return shools
+const sortedSchools = computed(() => {
+  if (!sortBy.value) return schools
 
-  return [...shools].sort((a, b) => {
+  return [...schools].sort((a, b) => {
     const aValue = a[sortBy.value]
     const bValue = b[sortBy.value]
 
@@ -50,34 +78,62 @@ function toggleSort(field) {
     sortOrder.value = 'asc'
   }
 }
+
+function getArrowClass(field, order) {
+  if (sortBy.value === field && sortOrder.value === order) {
+    return 'arrow active'
+  }
+  return 'arrow inactive'
+}
+
+const tableHeaderCells = [
+  {
+    text: 'Регион',
+    filter: 'region',
+  },
+  {
+    text: 'Название',
+    filter: 'name',
+  },
+  {
+    text: 'Адрес',
+    filter: 'adres',
+  },
+  {
+    text: 'Уровень образования',
+    filter: 'schoolLvls',
+  },
+]
 </script>
 
 <template>
   <div class="table">
-    <table border="1">
+    <table>
       <thead>
         <tr>
-          <th @click="toggleSort('region')" style="cursor: pointer">
-            Регион {{ sortBy === 'region' ? (sortOrder === 'asc' ? ' ↑' : ' ↓') : '' }}
-          </th>
-          <th @click="toggleSort('name')" style="cursor: pointer">
-            Название {{ sortBy === 'name' ? (sortOrder === 'asc' ? ' ↑' : ' ↓') : '' }}
-          </th>
-          <th @click="toggleSort('adres')" style="cursor: pointer">
-            Адрес {{ sortBy === 'adres' ? (sortOrder === 'asc' ? ' ↑' : ' ↓') : '' }}
-          </th>
-          <th @click="toggleSort('lvl')" style="cursor: pointer">
-            Уровень образования {{ sortBy === 'lvl' ? (sortOrder === 'asc' ? ' ↑' : ' ↓') : '' }}
+          <th
+            v-for="(cell, index) in tableHeaderCells"
+            :key="index"
+            @click="toggleSort(cell.filter)"
+          >
+            <div class="table-sell">
+              <p>{{ cell.text }}</p>
+              <span class="sort-arrows">
+                <span :class="getArrowClass('region', 'asc')"><IconArrowTop /></span>
+                <span :class="getArrowClass('region', 'desc')"><IconArrowBot /></span>
+              </span>
+            </div>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(shool, index) in sortedShools" :key="index">
-          <!-- Лучше использовать уникальный id, но если его нет — index допустим временно -->
-          <td>{{ shool.region }}</td>
-          <td>{{ shool.name }}</td>
-          <td>{{ shool.adres }}</td>
-          <td>{{ shool.lvl }}</td>
+        <tr v-for="(school, index) in sortedSchools" :key="index">
+          <td>{{ school.region }}</td>
+          <td>{{ school.name }}</td>
+          <td>{{ school.adres }}</td>
+          <td>
+            <div class="table-bubble-wrapper"><Bubble :school-lvls="school.lvls" /></div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -86,12 +142,4 @@ function toggleSort(field) {
 
 <style lang="scss">
 @use './VTable.scss' as *;
-
-/* Дополнительно можно стилизовать заголовки */
-th {
-  user-select: none; /* запрет выделения текста при клике */
-  &:hover {
-    background-color: #f0f0f0;
-  }
-}
 </style>
