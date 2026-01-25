@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import IconPaginationNext from '@/components/icons/VIconPaginationNext.vue'
 import IconPaginationPrev from '@/components/icons/VIconPaginationPrev.vue'
 import VPaginationSelect from '../select/VPaginationSelect.vue'
+// import VSelect from '../select/VSelect.vue'
 
 const props = defineProps({
   currentPage: {
@@ -121,6 +122,7 @@ const printCountValue = ref(9)
       <p>1 - {{ printCount.find((o) => o.value === printCountValue)?.label }} записей</p>
       <div class="pagination-limit-selector">
         <p>Показывать</p>
+        <!-- <VPaginationSelect v-model="printCountValue" :options="printCount" /> -->
         <VPaginationSelect v-model="printCountValue" :options="printCount" />
       </div>
     </div>

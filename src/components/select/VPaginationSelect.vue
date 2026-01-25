@@ -1,13 +1,16 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
+import IconArrowSelect from '../icons/VIconArrowSelect.vue'
 
 const props = defineProps({
-  modelValue: { type: [String, Number], default: undefined },
+  modelValue: [String, Number, null],
   options: {
     type: Array,
     required: true,
-    validator: (arr) =>
-      arr.every((option) => option.value !== undefined && option.label !== undefined),
+  },
+  placeholder: {
+    type: String,
+    default: 'Выберите...',
   },
 })
 
@@ -15,37 +18,34 @@ const emit = defineEmits(['update:modelValue'])
 
 const isOpen = ref(false)
 
-const displayText = computed(() => {
-  const selected = props.options.find((o) => o.value === props.modelValue)
-  return selected ? selected.label : (props.options[0]?.label ?? '')
+// находим текущий label по modelValue
+const selectedLabel = computed(() => {
+  const selected = props.options.find((opt) => opt.value === props.modelValue)
+  return selected ? selected.label : ''
 })
 
-function select(value) {
-  emit('update:modelValue', value)
+function selectOption(option) {
+  emit('update:modelValue', option.value)
   isOpen.value = false
 }
-
-// всегда выбираем первый элемент, если ничего не выбрано
-onMounted(() => {
-  if (props.modelValue == null && props.options.length > 0) {
-    emit('update:modelValue', props.options[0].value)
-  }
-})
 </script>
 
 <template>
-  <div class="pagination-select" @click="isOpen = !isOpen">
-    <div class="pagination-select--trigger">
-      {{ displayText }}
+  <div class="custom-select" :class="{ 'is-open': isOpen }">
+    <div class="select-trigger" @click="isOpen = !isOpen">
+      <span class="select-value">
+        {{ selectedLabel || placeholder }}
+      </span>
+      <span class="select-arrow"><IconArrowSelect /></span>
     </div>
 
-    <ul v-show="isOpen" class="pagination-select--options" @click.stop>
+    <ul v-show="isOpen" class="select-dropdown">
       <li
-        v-for="option in options"
-        :key="option.value"
-        class="pagination-select--option"
+        v-for="(option, index) in options"
+        :key="index"
+        class="select-option"
         :class="{ 'is-selected': option.value === props.modelValue }"
-        @click="select(option.value)"
+        @click="selectOption(option)"
       >
         {{ option.label }}
       </li>
