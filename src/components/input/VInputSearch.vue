@@ -32,5 +32,5 @@ function focusInput() {
 </template>
 
 <style lang="scss">
-@use './VInput.scss' as *;
+@use './VInputSearch.scss' as *;
 </style>

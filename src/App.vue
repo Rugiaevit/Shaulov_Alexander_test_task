@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import VInput from '@/components/input/VInput.vue'
+import VInputSearch from '@/components/input/VInputSearch.vue'
 import VSelect from '@/components/select/VSelect.vue'
 import VButton from '@/components/button/VButton.vue'
 import VTable from '@/components/table/VTable.vue'
@@ -27,7 +27,7 @@ const submit = () => console.log({ name: name.value, country: country.value })
 
 <template>
   <div style="max-width: 400px; margin: 0 auto; padding: 16px">
-    <VInput v-model="name" placeholder="Имя" />
+    <VInputSearch v-model="name" placeholder="Имя" />
     <VSelect
       v-model="federalDistrictValue"
       :options="federalDistricts"
