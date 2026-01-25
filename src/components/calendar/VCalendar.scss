@@ -31,6 +31,10 @@
   border-radius: 10px;
 }
 
+.dp__date_hover:hover {
+  border-radius: 0;
+}
+
 .dp__action_buttons .dp__action_select {
   background-color: $color-primary;
   font-size: clamp(rem(14), 4vw, rem(16));

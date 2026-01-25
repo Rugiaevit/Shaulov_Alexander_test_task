@@ -2,8 +2,7 @@
 import { ref } from 'vue'
 import VSelect from '../select/VSelect.vue'
 
-// import DateRangePicker from '../calendar/DateRangePicker.vue'
-import DateRangePicker from '../calendar2/VCalendar.vue'
+import VCalendar from '../calendar/VCalendar.vue'
 
 const selectedRange = ref([])
 // const selectedRange = ref(null)
@@ -26,7 +25,7 @@ const regionValue = ref(null)
 </script>
 <template>
   <div class="filter">
-    <DateRangePicker v-model="selectedRange" />
+    <VCalendar v-model="selectedRange" />
     <VSelect
       v-model="federalDistrictValue"
       :options="federalDistricts"

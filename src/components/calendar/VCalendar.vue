@@ -9,7 +9,7 @@ const dates = ref()
 </script>
 
 <template>
-  <VueDatePicker v-model="dates" :locale="ru" range auto-apply />
+  <VueDatePicker v-model="dates" :locale="ru" range />
 </template>
 
 <style lang="scss">
