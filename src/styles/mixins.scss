@@ -1,7 +1,9 @@
 @use './function.scss' as *;
+@use '@/styles/variables.scss' as *;
+@use 'sass:map';
 
 // --------------Миксин для media запросов---------------
-@mixin respond-to($breakpoint) {
+@mixin respond-up-to($breakpoint) {
   // проверка $breakpoints
   // map.has-key - аналог Object.hasOwn(obj, key) из JS,
   @if map.has-key($breakpoints, $breakpoint) {
@@ -16,10 +18,40 @@
     @warn "Неизвестный брейкпоинт: #{$breakpoint}";
   }
 }
+
+@mixin respond-down-to($breakpoint) {
+  // проверка $breakpoints
+  // map.has-key - аналог Object.hasOwn(obj, key) из JS,
+  @if map.has-key($breakpoints, $breakpoint) {
+    // проверка прошла
+    // получить значение из map (встроенный тип данных ассоциативный массив)
+    @media (max-width: map.get($breakpoints, $breakpoint)) {
+      // вставка из @include
+      @content;
+    }
+  } @else {
+    // Проверка не прошла
+    @warn "Неизвестный брейкпоинт: #{$breakpoint}";
+  }
+}
 //------------------------------------------------------
 
 @mixin button($bg, $text-color, $border-color) {
   background: $bg;
   color: $text-color;
   border-color: $border-color;
+}
+
+@mixin flex-row-space-between() {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-row-center() {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }

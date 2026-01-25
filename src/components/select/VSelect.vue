@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({
   modelValue: { type: [String, Number, null], default: null },
@@ -13,6 +13,7 @@ const props = defineProps({
   },
   placeholder: { type: String, default: 'Выберите...' },
   clearLabel: { type: String, default: '—' },
+  selectFirst: { type: Boolean, default: false },
 })
 
 // Событие "выбор" селектора
@@ -33,6 +34,15 @@ function select(value) {
   emit('update:modelValue', value)
   isOpen.value = false
 }
+
+// выбрать первый вариант, если передан selectFirst
+// и ничего не выбрано
+// onMounted аналог useEffect, производит действие после монтирование в dom
+onMounted(() => {
+  if (props.selectFirst && props.modelValue == null && props.options.length > 0) {
+    emit('update:modelValue', props.options[0].value)
+  }
+})
 
 // TODO: запомнить на будущее
 // v-for - это цыкл для вывода всех option из options
@@ -58,7 +68,7 @@ function select(value) {
     </div>
 
     <ul v-show="isOpen" class="select--options" @click.stop>
-      <li class="select--option" @click="select(null)">
+      <li v-if="!selectFirst" class="select--option" @click="select(null)">
         {{ clearLabel }}
       </li>
 

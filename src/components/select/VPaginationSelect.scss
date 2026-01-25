@@ -2,15 +2,17 @@
 @use '@/styles/function.scss' as *;
 @use '@/styles/mixins.scss' as ms;
 
-.select {
+.pagination-select {
   position: relative;
   width: 100%;
   cursor: pointer;
   height: rem(56);
+  min-width: rem(73);
+  height: auto;
 
   &--trigger {
     @include ms.flex-row-space-between();
-    padding: rem(16) rem(24);
+    padding: rem(10) rem(16);
     border-radius: rem(10);
     height: auto;
     border: 1px solid $color-border-light;

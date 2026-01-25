@@ -1,0 +1,28 @@
+@use '@/styles/variables.scss' as *;
+@use '@/styles/function.scss' as *;
+@use '@/styles/mixins.scss' as ms;
+
+.header {
+  width: 100%;
+  @include ms.flex-row-space-between();
+
+  &-title {
+    line-height: 1.2;
+    font-size: clamp(rem(24), 2.5vw, rem(32));
+    @include ms.respond-down-to(xs) {
+      text-align: center;
+    }
+  }
+
+  &-control {
+    gap: rem(20);
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+  }
+
+  @include ms.respond-down-to(xs) {
+    flex-direction: column;
+  }
+}

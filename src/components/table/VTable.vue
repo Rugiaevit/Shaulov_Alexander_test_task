@@ -2,6 +2,10 @@
 import { ref, computed } from 'vue'
 import IconArrowBot from '../icons/VIconArrowBot.vue'
 import IconArrowTop from '../icons/VIconArrowTop.vue'
+
+import IconNoSelect from '../icons/VIconNoSelect.vue'
+import IconSelect from '../icons/VIconSelect.vue'
+
 import Bubble from '@/components/bubble/VBubble.vue'
 
 // Исходные данные
@@ -101,9 +105,24 @@ const tableHeaderCells = [
   },
   {
     text: 'Уровень образования',
-    filter: 'schoolLvls',
+    filter: 'lvls',
   },
 ]
+
+// Хранит индексы или уникальные ID выбранных школ
+const selectedSchools = ref(new Set()) // или ref([]), но Set удобнее
+
+// Функция переключения выбора
+function toggleSelect(index) {
+  if (selectedSchools.value.has(index)) {
+    selectedSchools.value.delete(index)
+  } else {
+    selectedSchools.value.add(index)
+  }
+
+  // Опционально: эмитировать событие наверх (если нужно)
+  // emit('school-selected', { index, school: sortedSchools.value[index] })
+}
 </script>
 
 <template>
@@ -119,8 +138,8 @@ const tableHeaderCells = [
             <div class="table-sell">
               <p>{{ cell.text }}</p>
               <span class="sort-arrows">
-                <span :class="getArrowClass('region', 'asc')"><IconArrowTop /></span>
-                <span :class="getArrowClass('region', 'desc')"><IconArrowBot /></span>
+                <span :class="getArrowClass(cell.filter, 'asc')"><IconArrowTop /></span>
+                <span :class="getArrowClass(cell.filter, 'desc')"><IconArrowBot /></span>
               </span>
             </div>
           </th>
@@ -128,10 +147,24 @@ const tableHeaderCells = [
       </thead>
       <tbody>
         <tr v-for="(school, index) in sortedSchools" :key="index">
-          <td>{{ school.region }}</td>
-          <td>{{ school.name }}</td>
-          <td>{{ school.adres }}</td>
-          <td>
+          <td data-label="Регион">
+            <div class="region-cell">
+              <button
+                type="button"
+                class="select-icon"
+                @click.stop="toggleSelect(index)"
+                :aria-pressed="selectedSchools.has(index)"
+                aria-label="Выбрать школу"
+              >
+                <IconSelect v-if="selectedSchools.has(index)" />
+                <IconNoSelect v-else />
+              </button>
+              <p>{{ school.region }}</p>
+            </div>
+          </td>
+          <td data-label="Название">{{ school.name }}</td>
+          <td data-label="Адрес">{{ school.adres }}</td>
+          <td data-label="Уровень образования">
             <div class="table-bubble-wrapper"><Bubble :school-lvls="school.lvls" /></div>
           </td>
         </tr>

@@ -1,5 +1,8 @@
 <template>
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M3.5 22H20.5L22 20.75V3.25L20.5 2H3.5L2 3.25V20.75L3.5 22Z" fill="#D3D3DE" />
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M2.91663 18.3333H17.0833L18.3333 17.2917V2.70834L17.0833 1.66667H2.91663L1.66663 2.70834V17.2917L2.91663 18.3333Z"
+      fill="#D3D3DE"
+    />
   </svg>
 </template>

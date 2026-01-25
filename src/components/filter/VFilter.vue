@@ -1,0 +1,41 @@
+<script setup>
+import { ref } from 'vue'
+import VSelect from '../select/VSelect.vue'
+
+import DateRangePicker from '../calendar/DateRangePicker.vue'
+const selectedRange = ref([])
+
+const federalDistricts = ref([
+  { value: '1', label: 'federal district 1' },
+  { value: '2', label: 'federal district 2' },
+])
+
+const regions = ref([
+  { value: '1', label: 'region 1' },
+  { value: '2', label: 'region 2' },
+])
+
+const federalDistrictValue = ref(null)
+const regionValue = ref(null)
+</script>
+<template>
+  <div class="filter">
+    <DateRangePicker v-model="selectedRange" />
+
+    <VSelect
+      v-model="federalDistrictValue"
+      :options="federalDistricts"
+      placeholder="Выберите федеральный округ"
+      clear-label="Не выбрано"
+    />
+    <VSelect
+      v-model="regionValue"
+      :options="regions"
+      placeholder="Выберите регион"
+      clear-label="Не выбрано"
+    />
+  </div>
+</template>
+<style lang="scss">
+@use './VFilter.scss' as *;
+</style>
