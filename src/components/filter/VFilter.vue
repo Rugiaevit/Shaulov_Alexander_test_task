@@ -1,6 +1,5 @@
 <script setup>
 // src\components\filter\VFilter.vue
-import { ref } from 'vue'
 import VSelect from '../select/VSelect.vue'
 
 import VCalendar from '../calendar/VCalendar.vue'
@@ -8,17 +7,16 @@ import VCalendar from '../calendar/VCalendar.vue'
 const props = defineProps({
   regions: { type: Array, required: true, default: () => [] },
   federalDistricts: { type: Array, required: true, default: () => [] },
+  updatedAt: { type: [String, null], default: null },
   regionValue: { type: [Number, null], default: null },
   federalDistrictValue: { type: [Number, null], default: null },
 })
 
-defineEmits(['update:regionValue', 'update:federalDistrictValue'])
-
-const selectedRange = ref([])
+defineEmits(['update:regionValue', 'update:federalDistrictValue', 'update:updatedAt'])
 </script>
 <template>
   <div class="filter">
-    <VCalendar v-model="selectedRange" />
+    <VCalendar :model-value="updatedAt" @update:model-value="$emit('update:updatedAt', $event)" />
     <VSelect
       :model-value="federalDistrictValue"
       @update:model-value="$emit('update:federalDistrictValue', $event)"

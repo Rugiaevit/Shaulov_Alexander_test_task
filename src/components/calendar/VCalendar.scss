@@ -2,6 +2,11 @@
 @use '@/styles/function.scss' as *;
 @use '@/styles/mixins.scss' as ms;
 
+.dp--tp-wrap,
+.dp__selection_preview {
+  display: none;
+}
+
 .dp__theme_light {
   --dp-primary-color: #33d35e;
   --dp-hover-color: #c3fcd2;

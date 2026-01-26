@@ -18,6 +18,8 @@ const federalDistrictValue = ref(null)
 
 const schools = ref([])
 
+const updatedAt = ref(null)
+
 const loading = ref(false)
 const error = ref(null)
 
@@ -57,7 +59,7 @@ async function loadSchools() {
       count: pageSize.value,
       federal_district_id: federalDistrictValue.value,
       region_id: regionValue.value,
-      updated_at: null,
+      updated_at: updatedAt.value,
     })
     schools.value = schoolsData.schools
     totalPage.value = schoolsData.pages_count
@@ -75,25 +77,12 @@ onMounted(() => {
 })
 
 // PS для себя: watch аналог useEffect(() => {...},[i]); при монтировании
-watch(currentPage, () => {
-  loadSchools()
-})
-
-watch(pageSize, () => {
-  loadSchools()
-})
-
-watch(federalDistrictValue, () => {
+watch([federalDistrictValue, regionValue, updatedAt], () => {
   currentPage.value = 1
   pageSize.value = 9
-  loadSchools()
 })
 
-watch(regionValue, () => {
-  currentPage.value = 1
-  pageSize.value = 9
-  loadSchools()
-})
+watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loadSchools)
 </script>
 
 <template>
@@ -102,6 +91,7 @@ watch(regionValue, () => {
     <VFilter
       v-model:regionValue="regionValue"
       v-model:federalDistrictValue="federalDistrictValue"
+      v-model:updatedAt="updatedAt"
       :regions="regions"
       :federal-districts="federalDistricts"
     />

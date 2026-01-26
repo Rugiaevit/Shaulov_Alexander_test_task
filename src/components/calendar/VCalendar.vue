@@ -1,24 +1,42 @@
 <script setup>
 // npm install @vuepic/vue-datepicker
-import { ref } from 'vue'
+import { computed } from 'vue'
 import { VueDatePicker } from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ru } from 'date-fns/locale'
 
-const dates = ref()
+const props = defineProps({
+  modelValue: {
+    type: [String, null],
+    default: null,
+  },
+})
 
-// убрал range, т.к. API принимает параметр в виде одиночного Y-m-d
+const emit = defineEmits(['update:modelValue'])
+
+// Пришлось применить чтобы связать библиотечный календарь с updatedAt
+const internalValue = computed({
+  // get() — отдаёт текущее значение из родителя (VFilter.vue)
+  get() {
+    return props.modelValue
+  },
+  // set(value) — сообщает родителю (VFilter.vue) об изменении
+  set(value) {
+    emit('update:modelValue', value)
+  },
+})
 </script>
 
 <template>
-  <VueDatePicker v-model="dates" :locale="ru" :formats="{ input: 'Y-m-d' }" />
+  <VueDatePicker
+    v-model="internalValue"
+    :locale="ru"
+    :formats="{ input: 'y-M-d' }"
+    model-type="yyyy-MM-dd"
+    auto-apply
+  />
 </template>
 
 <style lang="scss">
 @use './VCalendar.scss' as *;
-
-.dp--tp-wrap,
-.dp__selection_preview {
-  display: none;
-}
 </style>
