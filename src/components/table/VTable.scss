@@ -179,6 +179,23 @@
   }
 }
 
+.placeholder-row {
+  background: linear-gradient(
+    90deg,
+    $color-placeholder,
+    $color-placeholder-light,
+    $color-placeholder
+  );
+  background-size: 200%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% 0;
+  }
+}
+
 // Адаптив: карточный вид на мобильных
 @media (max-width: 910px) {
   table,

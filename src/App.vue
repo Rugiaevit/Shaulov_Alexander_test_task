@@ -12,24 +12,20 @@ import { fetchFromApiSchools } from '@/core/api-schools.js'
 
 const regions = ref([])
 const federalDistricts = ref([])
+const schools = ref([])
+const totalPage = ref([])
 
 const regionValue = ref(null)
 const federalDistrictValue = ref(null)
-
-const schools = ref([])
-
 const updatedAt = ref(null)
-
-const loading = ref(false)
+const isLoading = ref(true)
 const error = ref(null)
 
 const currentPage = ref(1)
-
 const pageSize = ref(9)
-const totalPage = ref([])
 
 async function loadData() {
-  loading.value = true
+  isLoading.value = true
   error.value = null
   try {
     const [regionsData, districtsData, schoolsData] = await Promise.all([
@@ -47,12 +43,12 @@ async function loadData() {
   } catch (err) {
     error.value = err.message
   } finally {
-    loading.value = false
+    isLoading.value = false
   }
 }
 
 async function loadSchools() {
-  loading.value = true
+  isLoading.value = true
   try {
     const schoolsData = await fetchFromApiSchools({
       page: currentPage.value,
@@ -66,7 +62,7 @@ async function loadSchools() {
   } catch (err) {
     error.value = err.message
   } finally {
-    loading.value = false
+    isLoading.value = false
   }
 }
 
@@ -95,7 +91,7 @@ watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loa
       :regions="regions"
       :federal-districts="federalDistricts"
     />
-    <VTable :schools="schools" />
+    <VTable :schools="schools" :is-loading="isLoading" />
     <VPagination
       v-model:currentPage="currentPage"
       v-model:pageSize="pageSize"

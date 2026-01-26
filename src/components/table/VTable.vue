@@ -14,7 +14,22 @@ const props = defineProps({
     required: true,
     default: () => [],
   },
+  isLoading: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
 })
+
+// функция для создания заглушки на таблицу
+function createPlaceholderData(count = 9) {
+  return Array.from({ length: count }, () => ({
+    region: '',
+    name: '',
+    address: '',
+    lvls: [],
+  }))
+}
 
 // Состояние сортировки
 const sortBy = ref(null) // имя поля: 'region', 'name', и т.д.
@@ -22,6 +37,8 @@ const sortOrder = ref('asc') // 'asc' | 'desc'
 
 // Вычисляемый отсортированный список
 const sortedSchools = computed(() => {
+  if (props.isLoading) return createPlaceholderData(9)
+
   if (!sortBy.value) return props.schools
 
   return [...props.schools].sort((a, b) => {
@@ -93,9 +110,6 @@ function toggleSelect(index) {
   } else {
     selectedSchools.value.add(index)
   }
-
-  // Опционально: эмитировать событие наверх (если нужно)
-  // emit('school-selected', { index, school: sortedSchools.value[index] })
 }
 </script>
 
@@ -120,10 +134,15 @@ function toggleSelect(index) {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(school, index) in sortedSchools" :key="index">
+        <tr
+          v-for="(school, index) in sortedSchools"
+          :key="index"
+          :class="{ 'placeholder-row': props.isLoading }"
+        >
           <td data-label="Регион">
             <div class="region-cell">
               <button
+                v-if="!props.isLoading"
                 type="button"
                 class="select-icon"
                 @click.stop="toggleSelect(index)"
@@ -133,13 +152,15 @@ function toggleSelect(index) {
                 <IconSelect v-if="selectedSchools.has(index)" />
                 <IconNoSelect v-else />
               </button>
-              <p>{{ school.region }}</p>
+              <p>{{ school.region || '\u00A0' }}</p>
             </div>
           </td>
-          <td data-label="Название">{{ school.name }}</td>
-          <td data-label="Адрес">{{ school.address }}</td>
+          <td data-label="Название">{{ school.name || '\u00A0' }}</td>
+          <td data-label="Адрес">{{ school.address || '\u00A0' }}</td>
           <td data-label="Уровень образования">
-            <div class="table-bubble-wrapper"><Bubble :school-lvls="school.lvls" /></div>
+            <div class="table-bubble-wrapper">
+              <Bubble v-if="!props.isLoading" :school-lvls="school.lvls" />
+            </div>
           </td>
         </tr>
       </tbody>
