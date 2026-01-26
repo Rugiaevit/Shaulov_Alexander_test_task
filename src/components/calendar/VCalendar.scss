@@ -34,6 +34,13 @@
 .dp__input {
   padding: rem(16) rem(30) rem(16) rem(35);
   border-radius: 10px;
+
+  transition: all 0.2s ease;
+  border-color: $color-border-light;
+
+  &:hover:not(.dp__input_focus) {
+    background-color: $color-bg-light-hover;
+  }
 }
 
 .dp__date_hover:hover {

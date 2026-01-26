@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: space-between;
     padding: rem(10) rem(16);
-    border: 1px solid #ddd;
+    border: 1px solid $color-border-light;
     border-radius: 10px;
     background-color: white;
     cursor: pointer;
@@ -19,6 +19,11 @@
     color: $color-text-dark;
     user-select: none;
     height: calc(36px - 20px);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $color-bg-light-hover;
+    }
   }
 
   .select-pagination-value {
