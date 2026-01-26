@@ -1,28 +1,19 @@
 <script setup>
-import { ref, computed } from 'vue'
+// src\components\pagination\VPagination.vue
+import { computed } from 'vue'
 import IconPaginationNext from '@/components/icons/VIconPaginationNext.vue'
 import IconPaginationPrev from '@/components/icons/VIconPaginationPrev.vue'
 import VPaginationSelect from '../select/VPaginationSelect.vue'
 // import VSelect from '../select/VSelect.vue'
 
 const props = defineProps({
-  currentPage: {
-    type: Number,
-    required: true,
-  },
-  totalPages: {
-    type: Number,
-    required: true,
-    validator: (v) => v >= 1,
-  },
-  // сколько страниц показывать вокруг текущей
-  siblingCount: {
-    type: Number,
-    default: 1, // по бокам от текущей
-  },
+  currentPage: { type: Number, required: true },
+  totalPages: { type: Number, required: true, validator: (v) => v >= 1 },
+  pageSize: { type: Number, required: true },
+  siblingCount: { type: Number, default: 1 },
 })
 
-const emit = defineEmits(['update:currentPage'])
+const emit = defineEmits(['update:currentPage', 'update:pageSize'])
 
 const changePage = (page) => {
   if (typeof page === 'number' && page >= 1 && page <= props.totalPages) {
@@ -78,12 +69,14 @@ const pages = computed(() => {
 // по этому будем делатьградацию
 
 const printCount = [
-  { value: 9, label: '9' },
-  { value: 18, label: '18' },
-  { value: 27, label: '27' },
-  { value: 36, label: '36' },
+  { value: 9, title: '9' },
+  { value: 18, title: '18' },
+  { value: 27, title: '27' },
+  { value: 36, title: '36' },
 ]
-const printCountValue = ref(9)
+
+//  @update:model-value="$emit('update:pageSize', $event)" - связка между App.vue и VPaginationSelect.vue,
+// для проброски emit в более глубокую вложенность
 </script>
 
 <template>
@@ -119,11 +112,14 @@ const printCountValue = ref(9)
       </button>
     </div>
     <div class="pagination-limit-control">
-      <p>1 - {{ printCount.find((o) => o.value === printCountValue)?.label }} записей</p>
+      <p>1 - {{ pageSize }} записей</p>
       <div class="pagination-limit-selector">
         <p>Показывать</p>
-        <!-- <VPaginationSelect v-model="printCountValue" :options="printCount" /> -->
-        <VPaginationSelect v-model="printCountValue" :options="printCount" />
+        <VPaginationSelect
+          :model-value="pageSize"
+          @update:model-value="$emit('update:pageSize', $event)"
+          :options="printCount"
+        />
       </div>
     </div>
   </div>

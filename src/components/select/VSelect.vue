@@ -18,14 +18,14 @@ const emit = defineEmits(['update:modelValue'])
 
 const isOpen = ref(false)
 
-// находим текущий label по modelValue
-const selectedLabel = computed(() => {
-  const selected = props.options.find((opt) => opt.value === props.modelValue)
-  return selected ? selected.label : ''
+// находим текущий title по modelValue
+const selectedTitle = computed(() => {
+  const selected = props.options.find((opt) => opt.id === props.modelValue)
+  return selected ? selected.title : ''
 })
 
 function selectOption(option) {
-  emit('update:modelValue', option.value)
+  emit('update:modelValue', option.id)
   isOpen.value = false
 }
 </script>
@@ -34,7 +34,7 @@ function selectOption(option) {
   <div class="custom-select" :class="{ 'is-open': isOpen }">
     <div class="select-trigger" @click="isOpen = !isOpen">
       <span class="select-value">
-        {{ selectedLabel || placeholder }}
+        {{ selectedTitle || placeholder }}
       </span>
       <span class="select-arrow"><IconArrowSelect /></span>
     </div>
@@ -44,10 +44,10 @@ function selectOption(option) {
         v-for="(option, index) in options"
         :key="index"
         class="select-option"
-        :class="{ 'is-selected': option.value === props.modelValue }"
+        :class="{ 'is-selected': option.id === props.modelValue }"
         @click="selectOption(option)"
       >
-        {{ option.label }}
+        {{ option.title }}
       </li>
     </ul>
   </div>

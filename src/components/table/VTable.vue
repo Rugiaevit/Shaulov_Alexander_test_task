@@ -8,39 +8,13 @@ import IconSelect from '../icons/VIconSelect.vue'
 
 import Bubble from '@/components/bubble/VBubble.vue'
 
-// Исходные данные
-const schools = [
-  {
-    region: 'Белгородская область',
-    name: 'МБОУ Средняя общеобразовательная школа №2',
-    adres: 'ул. Николая Гондатти, д. 13 ул. Н. Гондатти 13 ; ул. Н. Зелинского 22',
-    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
+const props = defineProps({
+  schools: {
+    type: Array,
+    required: true,
+    default: () => [],
   },
-  {
-    region: 'Брянская область',
-    name: 'МБОУ Основная общеобразовательная школа №3',
-    adres: 'с. Засечное, ул. Изумрудная 8А',
-    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
-  },
-  {
-    region: 'Владимирская область',
-    name: 'МБОУ СОШ №7 ',
-    adres: 'ул. Строителей, д.2а ул. Домостроителей 2а, ул. Камчатская, 154',
-    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
-  },
-  {
-    region: 'Воронежская область',
-    name: 'МБОУ Средняя общеобразовательная школа №5',
-    adres: 'Большая Очаковская улица, дом 42, корпус 2',
-    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
-  },
-  {
-    region: 'Ивановская область',
-    name: 'МБУДО Детская школа искусств',
-    adres: 'бул. Измайловский, 4',
-    lvls: ['Среднее', 'Высшее', 'Специальное', 'Проф', 'Бакалавр'],
-  },
-]
+})
 
 // Состояние сортировки
 const sortBy = ref(null) // имя поля: 'region', 'name', и т.д.
@@ -48,9 +22,9 @@ const sortOrder = ref('asc') // 'asc' | 'desc'
 
 // Вычисляемый отсортированный список
 const sortedSchools = computed(() => {
-  if (!sortBy.value) return schools
+  if (!sortBy.value) return props.schools
 
-  return [...schools].sort((a, b) => {
+  return [...props.schools].sort((a, b) => {
     const aValue = a[sortBy.value]
     const bValue = b[sortBy.value]
 
@@ -101,7 +75,7 @@ const tableHeaderCells = [
   },
   {
     text: 'Адрес',
-    filter: 'adres',
+    filter: 'address',
   },
   {
     text: 'Уровень образования',
@@ -163,7 +137,7 @@ function toggleSelect(index) {
             </div>
           </td>
           <td data-label="Название">{{ school.name }}</td>
-          <td data-label="Адрес">{{ school.adres }}</td>
+          <td data-label="Адрес">{{ school.address }}</td>
           <td data-label="Уровень образования">
             <div class="table-bubble-wrapper"><Bubble :school-lvls="school.lvls" /></div>
           </td>

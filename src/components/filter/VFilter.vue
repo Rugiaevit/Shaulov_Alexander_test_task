@@ -1,37 +1,36 @@
 <script setup>
+// src\components\filter\VFilter.vue
 import { ref } from 'vue'
 import VSelect from '../select/VSelect.vue'
 
 import VCalendar from '../calendar/VCalendar.vue'
 
+const props = defineProps({
+  regions: { type: Array, required: true, default: () => [] },
+  federalDistricts: { type: Array, required: true, default: () => [] },
+  regionValue: { type: [Number, null], default: null },
+  federalDistrictValue: { type: [Number, null], default: null },
+})
+
+defineEmits(['update:regionValue', 'update:federalDistrictValue'])
+
 const selectedRange = ref([])
-// const selectedRange = ref(null)
-
-const federalDistricts = ref([
-  { value: '', label: 'Не выбрано' },
-  { value: '1', label: 'federal district 1' },
-  { value: '2', label: 'federal district 2' },
-])
-
-const regions = ref([
-  { value: '', label: 'Не выбрано' },
-  { value: '1', label: 'region 1' },
-  { value: '1', label: 'region 1' },
-  { value: '2', label: 'region 2' },
-])
-
-const federalDistrictValue = ref(null)
-const regionValue = ref(null)
 </script>
 <template>
   <div class="filter">
     <VCalendar v-model="selectedRange" />
     <VSelect
-      v-model="federalDistrictValue"
-      :options="federalDistricts"
+      :model-value="federalDistrictValue"
+      @update:model-value="$emit('update:federalDistrictValue', $event)"
+      :options="props.federalDistricts"
       placeholder="Выберите федеральный округ"
     />
-    <VSelect v-model="regionValue" :options="regions" placeholder="Выберите регион" />
+    <VSelect
+      :model-value="regionValue"
+      @update:model-value="$emit('update:regionValue', $event)"
+      :options="props.regions"
+      placeholder="Выберите регион"
+    />
   </div>
 </template>
 <style lang="scss">

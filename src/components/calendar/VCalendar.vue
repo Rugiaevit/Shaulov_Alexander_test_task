@@ -6,10 +6,12 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { ru } from 'date-fns/locale'
 
 const dates = ref()
+
+// убрал range, т.к. API принимает параметр в виде одиночного Y-m-d
 </script>
 
 <template>
-  <VueDatePicker v-model="dates" :locale="ru" range />
+  <VueDatePicker v-model="dates" :locale="ru" :formats="{ input: 'Y-m-d' }" />
 </template>
 
 <style lang="scss">

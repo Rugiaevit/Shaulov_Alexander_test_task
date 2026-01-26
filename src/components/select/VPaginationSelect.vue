@@ -1,27 +1,22 @@
 <script setup>
+// src\components\select\VPaginationSelect.vue
 import { ref, computed } from 'vue'
 import IconArrowSelect from '../icons/VIconArrowSelect.vue'
 
 const props = defineProps({
-  modelValue: [String, Number, null],
-  options: {
-    type: Array,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    default: 'Выберите...',
-  },
+  modelValue: { type: Number, required: true },
+  options: { type: Array, required: true },
+  placeholder: { type: String, default: 'Выберите...' },
 })
 
 const emit = defineEmits(['update:modelValue'])
 
 const isOpen = ref(false)
 
-// находим текущий label по modelValue
-const selectedLabel = computed(() => {
+// находим текущий title по modelValue
+const selectedTitle = computed(() => {
   const selected = props.options.find((opt) => opt.value === props.modelValue)
-  return selected ? selected.label : ''
+  return selected ? selected.title : props.placeholder
 })
 
 function selectOption(option) {
@@ -34,7 +29,7 @@ function selectOption(option) {
   <div class="custom-select-pagination" :class="{ 'is-open': isOpen }">
     <div class="select-pagination-trigger" @click="isOpen = !isOpen">
       <span class="select-pagination-value">
-        {{ selectedLabel || placeholder }}
+        {{ selectedTitle || placeholder }}
       </span>
       <span class="select-pagination-arrow"><IconArrowSelect /></span>
     </div>
@@ -47,7 +42,7 @@ function selectOption(option) {
         :class="{ 'is-selected': option.value === props.modelValue }"
         @click="selectOption(option)"
       >
-        {{ option.label }}
+        {{ option.title }}
       </li>
     </ul>
   </div>
