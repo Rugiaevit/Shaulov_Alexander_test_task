@@ -113,7 +113,8 @@ function toggleSelect(index) {
   }
 }
 
-// Определяем, какую иконку показывать в шапке
+// Динамическое определение иконки в шапке через <component :is="">
+// https://www.w3schools.com/vue/ref_component.php
 const headerSelectIcon = computed(() => {
   if (props.isLoading) return IconNoSelect
 

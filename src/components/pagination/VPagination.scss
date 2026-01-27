@@ -6,19 +6,19 @@
   @include ms.flex-row-space-between();
   font-size: clamp(rem(10), 4vw, rem(12));
 
-  &-page-control {
+  &__page-control {
     @include ms.flex-row-space-between();
     width: 100%;
     max-width: 324px;
   }
 
-  &-limit-selector {
+  &__limit-selector {
     @include ms.flex-row-space-between();
     gap: rem(6);
   }
 
-  &-btn-prev,
-  &-btn-next {
+  &__btn-prev,
+  &__btn-next {
     width: 44px;
     height: 36px;
     background: transparent;
@@ -31,9 +31,16 @@
     &:hover {
       background-color: $color-bg-light-hover;
     }
+
+    &:disabled {
+      opacity: 0.5;
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
 
-  &-page {
+  &__page {
     cursor: pointer;
     width: fit-content;
     height: auto;
@@ -42,12 +49,18 @@
     border-radius: 10px;
     padding: rem(10) rem(15);
 
-    &:hover {
+    &:hover:not(&._state_dots) {
       background-color: $color-pagination-bg-hover;
     }
 
-    &--active {
+    &_state_active {
       background-color: $color-pagination-bg-active;
+      pointer-events: none;
+    }
+
+    &_state_dots {
+      cursor: default;
+      pointer-events: none;
     }
 
     @include ms.respond-down-to(sm) {
@@ -55,24 +68,27 @@
     }
   }
 
-  &-limit-control,
-  &-limit-selector {
+  &__limit-control,
+  &__limit-selector {
     @include ms.flex-row-space-between();
     gap: rem(16);
   }
 
   @include ms.respond-down-to(sm) {
     flex-direction: column;
-    &-limit-control {
+
+    &__limit-control {
       order: 1;
       margin-bottom: rem(24);
     }
-    &-page-control {
+
+    &__page-control {
       order: 2;
     }
   }
+
   @include ms.respond-down-to(xxs) {
-    &-limit-control {
+    &__limit-control {
       flex-direction: column;
     }
   }

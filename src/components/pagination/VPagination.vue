@@ -1,10 +1,8 @@
 <script setup>
-// src\components\pagination\VPagination.vue
 import { computed } from 'vue'
 import IconPaginationNext from '@/components/icons/VIconPaginationNext.vue'
 import IconPaginationPrev from '@/components/icons/VIconPaginationPrev.vue'
 import VPaginationSelect from '../select/VPaginationSelect.vue'
-// import VSelect from '../select/VSelect.vue'
 
 const props = defineProps({
   currentPage: { type: Number, required: true },
@@ -78,9 +76,9 @@ const printCount = [
 
 <template>
   <div class="pagination">
-    <div class="pagination-page-control">
+    <div class="pagination__page-control">
       <button
-        class="pagination-btn-prev"
+        class="pagination__btn-prev"
         :disabled="currentPage <= 1"
         @click="changePage(currentPage - 1)"
       >
@@ -90,10 +88,10 @@ const printCount = [
       <span
         v-for="(page, index) in pages"
         :key="index"
-        class="pagination-page"
+        class="pagination__page"
         :class="{
-          'pagination-page--active': page === currentPage,
-          'pagination-page--dots': page === '...',
+          pagination__page_state_active: page === currentPage,
+          pagination__page_state_dots: page === '...',
         }"
         @click="changePage(page)"
       >
@@ -101,17 +99,17 @@ const printCount = [
       </span>
 
       <button
-        class="pagination-btn-next"
+        class="pagination__btn-next"
         :disabled="currentPage >= totalPages"
         @click="changePage(currentPage + 1)"
       >
         <IconPaginationNext />
       </button>
     </div>
-    <div class="pagination-limit-control">
-      <p>1 - {{ pageSize }} записей</p>
-      <div class="pagination-limit-selector">
-        <p>Показывать</p>
+    <div class="pagination__limit-control">
+      <p class="pagination__info">1 - {{ pageSize }} записей</p>
+      <div class="pagination__limit-selector">
+        <p class="pagination__label">Показывать</p>
         <VPaginationSelect
           :model-value="pageSize"
           @update:model-value="$emit('update:pageSize', $event)"

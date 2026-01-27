@@ -26,20 +26,20 @@ function selectOption(option) {
 </script>
 
 <template>
-  <div class="custom-select-pagination" :class="{ 'is-open': isOpen }">
-    <div class="select-pagination-trigger" @click="isOpen = !isOpen">
-      <span class="select-pagination-value">
+  <div class="pagination-select" :class="{ 'pagination-select_state_open': isOpen }">
+    <div class="pagination-select__trigger" @click="isOpen = !isOpen">
+      <span class="pagination-select__value">
         {{ selectedTitle || placeholder }}
       </span>
-      <span class="select-pagination-arrow"><IconArrowSelect /></span>
+      <span class="pagination-select__arrow"><IconArrowSelect /></span>
     </div>
 
-    <ul v-show="isOpen" class="select-pagination-dropdown">
+    <ul v-show="isOpen" class="pagination-select__dropdown">
       <li
         v-for="(option, index) in options"
         :key="index"
-        class="select-pagination-option"
-        :class="{ 'is-selected': option.value === props.modelValue }"
+        class="pagination-select__option"
+        :class="{ 'pagination-select__option_state_selected': option.value === props.modelValue }"
         @click="selectOption(option)"
       >
         {{ option.title }}

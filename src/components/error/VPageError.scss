@@ -13,7 +13,7 @@
   background-color: #0000006b;
   z-index: 99999;
 
-  &-wrapper {
+  &__wrapper {
     padding: rem(32);
     border-radius: 10px;
     width: fit-content;
@@ -22,14 +22,16 @@
     max-width: 80vw;
   }
 
-  &-text {
+  &__text {
     font-size: clamp(rem(18), 2.5vw, rem(24));
     color: $color-text-dark;
     text-align: center;
   }
-  &-msg {
+
+  &__msg {
     margin-top: rem(25);
     color: $color-text-dark;
     font-size: clamp(rem(16), 2.5vw, rem(18));
+    text-align: center;
   }
 }
