@@ -1,5 +1,5 @@
 <script setup>
-// npm install @vuepic/vue-datepicker
+// библа npm install @vuepic/vue-datepicker
 import { computed } from 'vue'
 import { VueDatePicker } from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -31,7 +31,7 @@ const internalValue = computed({
   <VueDatePicker
     v-model="internalValue"
     :locale="ru"
-    :formats="{ input: 'y-M-d' }"
+    :formats="{ input: 'dd MMMM yyyy' }"
     model-type="yyyy-MM-dd"
     auto-apply
   />

@@ -2,7 +2,6 @@ import { ApiClient } from './api-client.js'
 
 const client = new ApiClient('/api')
 
-// export async function fetchFromApiSchools() {
 export async function fetchFromApiSchools(params = {}) {
   const {
     count = 9,
@@ -13,6 +12,7 @@ export async function fetchFromApiSchools(params = {}) {
   } = params
 
   let parts = []
+  // encodeURIComponent() - кодировка в URI, защита от некорректных символов
   if (count != null) parts.push(`count=${encodeURIComponent(count)}`)
   if (page != null) parts.push(`page=${encodeURIComponent(page)}`)
   if (federal_district_id != null)
@@ -23,6 +23,33 @@ export async function fetchFromApiSchools(params = {}) {
   const queryString = parts.length ? '?' + parts.join('&') : ''
   const schools = await client.get('/schools' + queryString)
 
+  //mapping — чтобы уменьшить названия если нет short_name
+  const lvlsMapping = {
+    общеобразовательный: 'Общеобразовательный',
+    'Начальное общее образование': 'Начальное',
+    'Среднее общее образование': 'Сред. общ.',
+    'Среднее профессиональное образование': 'Сред. проф.',
+    'Высшее образование - специалитет': 'Специалитет',
+    'Послевузовское профессиональное образование': 'Послевузовское',
+    'Высшее образование - бакалавриат': 'Бакалавриат',
+    'Высшее профессиональное образование': 'Высшее',
+  }
+
+  // прогонка строки через mapping чтобы сократить названия
+  const formatLvls = (str) => lvlsMapping[str] || str
+
+  // получить полнй массив уровней, без дубликатов (Set) и защитой от null/undefined (filter(Boolean))
+  const getSchoolsLvls = (lvls = []) => [
+    ...new Set(
+      lvls
+        .map((lvl) => {
+          const name = lvl?.edu_level?.short_name || lvl?.edu_level?.name
+          return name ? formatLvls(name) : null
+        })
+        .filter(Boolean),
+    ),
+  ]
+
   return {
     pages_count: schools.data.pages_count,
     schools_count: schools.data.total_count,
@@ -30,13 +57,7 @@ export async function fetchFromApiSchools(params = {}) {
       region: item.edu_org.region.name,
       name: item.edu_org.short_name || item.edu_org.full_name,
       address: item.edu_org.contact_info?.post_address || 'Адрес не указан',
-      lvls: (item.supplements?.[0]?.educational_programs || [])
-        .map((prog) =>
-          prog.edu_level?.name !== 'Не определен'
-            ? prog.edu_level?.short_name || prog.edu_level?.name
-            : null,
-        )
-        .filter(Boolean), //Избавить от null и undefined в ответе
+      lvls: getSchoolsLvls(item.supplements?.[0]?.educational_programs),
     })),
   }
 }
