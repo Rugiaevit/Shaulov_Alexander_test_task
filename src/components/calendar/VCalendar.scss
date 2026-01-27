@@ -2,30 +2,70 @@
 @use '@/styles/function.scss' as *;
 @use '@/styles/mixins.scss' as ms;
 
+.calendar {
+  width: 100%;
+}
+
+// ——— переопределение стилей календаря ———————
+// Скрываем ненужные элементы
 .dp--tp-wrap,
 .dp__selection_preview {
   display: none;
 }
 
+// меняем основные цвета (Через переменные не получается)
 .dp__theme_light {
   --dp-primary-color: #33d35e;
   --dp-hover-color: #c3fcd2;
 }
 
+// убрал скругления у дней в календаре
 .dp__range_end,
-.dp__range_start {
+.dp__range_start,
+.dp__today,
+.dp__date_hover:hover {
   border-radius: 0;
 }
 
+// кнопки действий
 .dp__action_buttons {
   flex: auto;
   justify-content: space-between;
+
+  .dp__action_select {
+    background-color: $color-primary;
+    font-size: clamp(rem(14), 4vw, rem(16));
+    padding: rem(10) 0;
+    width: 100%;
+    height: auto;
+    max-width: 90px;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid $color-primary;
+
+    &:hover {
+      background-color: $color-accent;
+      border-color: $color-accent;
+    }
+  }
+
+  .dp__action_cancel {
+    font-size: clamp(rem(14), 4vw, rem(16));
+    padding: rem(10) 0;
+    width: 100%;
+    height: auto;
+    max-width: 90px;
+    justify-content: center;
+    border-radius: 10px;
+    border-color: $color-border-medium;
+
+    &:hover {
+      border-color: $color-border-dark;
+    }
+  }
 }
 
-.dp__today {
-  border-radius: 0;
-}
-
+// поле ввода
 .dp__input {
   padding: rem(16) rem(30) rem(16) rem(35);
   border-radius: 10px;
@@ -38,47 +78,13 @@
   &:hover:not(.dp__input_focus) {
     background-color: $color-bg-light-hover;
   }
-}
 
-// Переопределение placeholder
-.dp__input::placeholder {
-  color: $color-dropdown-text-placeholder !important;
-  font-family: inherit !important;
-  font-size: clamp(rem(15), 4vw, rem(17)) !important;
-  font-weight: 400 !important;
-  opacity: 1 !important;
-}
-
-.dp__date_hover:hover {
-  border-radius: 0;
-}
-
-.dp__action_buttons .dp__action_select {
-  background-color: $color-primary;
-  font-size: clamp(rem(14), 4vw, rem(16));
-  padding: rem(10) 0;
-  width: 100%;
-  height: auto;
-  max-width: 90px;
-  justify-content: center;
-  border-radius: 10px;
-  border: 1px solid $color-primary;
-  &:hover {
-    background-color: $color-accent;
-    border-color: $color-accent;
-  }
-}
-
-.dp__action_cancel {
-  font-size: clamp(rem(14), 4vw, rem(16));
-  padding: rem(10) 0;
-  width: 100%;
-  height: auto;
-  max-width: 90px;
-  justify-content: center;
-  border-radius: 10px;
-  border-color: $color-border-medium;
-  &:hover {
-    border-color: $color-border-dark;
+  // переопределение placeholder
+  &::placeholder {
+    color: $color-dropdown-text-placeholder !important;
+    font-family: inherit !important;
+    font-size: clamp(rem(15), 4vw, rem(17)) !important;
+    font-weight: 400 !important;
+    opacity: 1 !important;
   }
 }

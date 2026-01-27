@@ -28,18 +28,18 @@ const internalValue = computed({
 </script>
 
 <template>
-  <VueDatePicker
-    v-model="internalValue"
-    :locale="ru"
-    :formats="{ input: 'dd MMMM yyyy' }"
-    model-type="yyyy-MM-dd"
-    auto-apply
-    :placeholder="'Выберите дату обновления'"
-  />
+  <div class="calendar">
+    <VueDatePicker
+      v-model="internalValue"
+      :locale="ru"
+      :formats="{ input: 'dd MMMM yyyy' }"
+      model-type="yyyy-MM-dd"
+      auto-apply
+      :placeholder="'Выберите дату обновления'"
+    />
+  </div>
 </template>
 
 <style lang="scss">
-@use './VCalendar.scss' as *;
+@use './VCalendar.scss';
 </style>
-
-<style scoped></style>

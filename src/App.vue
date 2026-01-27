@@ -83,7 +83,7 @@ watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loa
 
 <template>
   <div>
-    <div class="school-table">
+    <div class="school-list">
       <VHeader />
       <VFilter
         v-model:regionValue="regionValue"
@@ -109,7 +109,7 @@ watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loa
 @use '@/styles/variables.scss' as *;
 @use '@/styles/function.scss' as *;
 
-.school-table {
+.school-list {
   display: flex;
   flex-direction: column;
   gap: 24px;

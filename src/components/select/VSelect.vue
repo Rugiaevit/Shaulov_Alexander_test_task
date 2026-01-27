@@ -4,14 +4,8 @@ import IconArrowSelect from '../icons/VIconArrowSelect.vue'
 
 const props = defineProps({
   modelValue: [String, Number, null],
-  options: {
-    type: Array,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    default: 'Выберите...',
-  },
+  options: { type: Array, required: true },
+  placeholder: { type: String, default: 'Выберите...' },
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -31,20 +25,23 @@ function selectOption(option) {
 </script>
 
 <template>
-  <div class="custom-select" :class="{ 'is-open': isOpen }">
-    <div class="select-trigger" @click="isOpen = !isOpen">
-      <span :class="['select-value', props.modelValue === null ? 'select-placeholder' : '']">
+  <div class="select">
+    <div class="select__trigger" @click="isOpen = !isOpen">
+      <span
+        class="select__value"
+        :class="{ select__value_state_placeholder: props.modelValue === null }"
+      >
         {{ props.modelValue !== null ? selectedTitle : placeholder }}
       </span>
-      <span class="select-arrow"><IconArrowSelect /></span>
+      <span class="select__arrow"><IconArrowSelect /></span>
     </div>
 
-    <ul v-show="isOpen" class="select-dropdown">
+    <ul v-show="isOpen" class="select__dropdown">
       <li
-        v-for="(option, index) in options"
-        :key="index"
-        class="select-option"
-        :class="{ 'is-selected': option.id === props.modelValue }"
+        v-for="option in props.options"
+        :key="option.id"
+        class="select__option"
+        :class="{ select__option_state_selected: option.id === props.modelValue }"
         @click="selectOption(option)"
       >
         {{ option.title }}

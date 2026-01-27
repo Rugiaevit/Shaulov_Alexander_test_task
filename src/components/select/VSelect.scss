@@ -1,12 +1,12 @@
 @use '@/styles/variables.scss' as *;
 @use '@/styles/function.scss' as *;
 
-.custom-select {
+.select {
   font-family: inherit;
   position: relative;
   width: 100%;
 
-  .select-trigger {
+  &__trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,10 +17,9 @@
     cursor: pointer;
     font-size: clamp(rem(14), 4vw, rem(16));
     font-weight: 400;
-    font-family: inherit;
     color: $color-text-dark;
     user-select: none;
-    height: calc(56px - 34px); // 34px = 2 * 16(padding) + 2 * 1(border)
+    height: calc(56px - 34px); // 2*16(padding) + 2*1(border)
     transition: all 0.2s ease;
 
     &:hover {
@@ -28,24 +27,24 @@
     }
   }
 
-  .select-value {
+  &__value {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     flex-grow: 1;
+
+    &_state_placeholder {
+      color: $color-dropdown-text-placeholder;
+    }
   }
 
-  .select-placeholder {
-    color: $color-dropdown-text-placeholder;
-  }
-
-  .select-arrow {
+  &__arrow {
     margin-left: 8px;
     color: $color-text-medium;
     font-size: 12px;
   }
 
-  .select-dropdown {
+  &__dropdown {
     padding: rem(6);
     position: absolute;
     top: 60px;
@@ -58,22 +57,19 @@
     z-index: 1000;
     margin: 0;
     list-style: none;
+  }
 
-    .select-option {
-      border-radius: 8px;
-      padding: rem(10) rem(16);
-      cursor: pointer;
-      background-color: $color-dropdown-item-bg;
-      font-size: clamp(rem(14), 4vw, rem(16));
-      margin-bottom: 1px;
+  &__option {
+    border-radius: 8px;
+    padding: rem(10) rem(16);
+    cursor: pointer;
+    background-color: $color-dropdown-item-bg;
+    font-size: clamp(rem(14), 4vw, rem(16));
+    margin-bottom: 1px;
 
-      &:hover {
-        background-color: $color-dropdown-item-bg-hover;
-      }
-
-      &.is-selected {
-        background-color: $color-dropdown-item-bg-hover;
-      }
+    &:hover,
+    &_state_selected {
+      background-color: $color-dropdown-item-bg-hover;
     }
   }
 }

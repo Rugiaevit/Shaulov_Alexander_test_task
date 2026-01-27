@@ -16,11 +16,11 @@ defineEmits(['click'])
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
-    <span v-if="save" class="btn-icon"><IconSave /></span
-    ><span class="btn-text"><slot></slot></span>
+    <span v-if="save" class="btn__icon"><IconSave /></span>
+    <span class="btn__text"><slot></slot></span>
   </button>
 </template>
 
 <style lang="scss">
-@use './VButton.scss' as *;
+@use './VButton.scss';
 </style>

@@ -10,4 +10,14 @@
   @include ms.respond-down-to(lg) {
     flex-direction: column;
   }
+
+  &__field {
+    flex: 1; // Каждое поле занимает равное пространство
+    min-width: 0; // предотвращает переполнение
+
+    @include ms.respond-down-to(lg) {
+      flex: none;
+      width: 100%;
+    }
+  }
 }
