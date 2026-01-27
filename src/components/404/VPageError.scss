@@ -1,0 +1,35 @@
+@use '@/styles/variables.scss' as *;
+@use '@/styles/function.scss' as *;
+
+.page-error {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0000006b;
+  z-index: 99999;
+
+  &-wrapper {
+    padding: rem(32);
+    border-radius: 10px;
+    width: fit-content;
+    height: auto;
+    background-color: $color-bg-main;
+    max-width: 80vw;
+  }
+
+  &-text {
+    font-size: clamp(rem(18), 2.5vw, rem(24));
+    color: $color-text-dark;
+    text-align: center;
+  }
+  &-msg {
+    margin-top: rem(25);
+    color: $color-text-dark;
+    font-size: clamp(rem(16), 2.5vw, rem(18));
+  }
+}

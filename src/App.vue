@@ -5,6 +5,7 @@ import VTable from '@/components/table/VTable.vue'
 import VFilter from '@/components/filter/VFilter.vue'
 import VHeader from '@/components/header/VHeader.vue'
 import VPagination from '@/components/pagination/VPagination.vue'
+import VPageError from '@/components/404/VPageError.vue'
 
 import { fetchFromApiRegions } from '@/core/api-regions.js'
 import { fetchFromApiFederalDistricts } from '@/core/api-federal-districts.js'
@@ -82,7 +83,7 @@ watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loa
 </script>
 
 <template>
-  <div class="main">
+  <div class="school-table">
     <VHeader />
     <VFilter
       v-model:regionValue="regionValue"
@@ -98,6 +99,7 @@ watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loa
       :total-pages="totalPage"
     />
   </div>
+  <VPageError v-if="error" :error="error" />
 </template>
 
 <style lang="scss">
@@ -106,7 +108,7 @@ watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loa
 @use '@/styles/variables.scss' as *;
 @use '@/styles/function.scss' as *;
 
-.main {
+.school-table {
   display: flex;
   flex-direction: column;
   gap: 24px;

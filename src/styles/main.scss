@@ -1,35 +1,13 @@
 @use './function.scss' as *;
 @use './variables.scss' as *;
 
-/* do not group these rules */
-*::-webkit-input-placeholder {
-  color: red;
-}
-*:-moz-placeholder {
-  /* FF 4-18 */
-  color: red;
-  opacity: 1;
-}
-*::-moz-placeholder {
-  /* FF 19+ */
-  color: red;
-  opacity: 1;
-}
-*:-ms-input-placeholder {
-  /* IE 10+ */
-  color: red;
-}
-*::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: red;
-}
-*::placeholder {
-  /* modern browser */
-  color: red;
-}
-
 html {
   font-size: 16px;
   background-color: #f1f4fd;
   font-family: 'Gotham Pro', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
