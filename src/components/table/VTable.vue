@@ -142,30 +142,31 @@ function toggleSelectAll() {
 </script>
 
 <template>
-  <div class="table">
-    <table>
-      <thead>
-        <tr>
+  <div class="school-table">
+    <table class="school-table__layout">
+      <thead class="school-table__head">
+        <tr class="school-table__header-row">
           <th
             v-for="(cell, index) in tableHeaderCells"
             :key="index"
             @click="toggleSort(cell.filter)"
+            class="school-table__header-cell"
           >
-            <div class="table-sell">
+            <div class="school-table__header-content">
               <!-- Иконка выбора только в первой колонке -->
               <button
                 v-if="index === 0"
                 type="button"
-                class="select-icon"
+                class="school-table__select-icon"
                 @click.stop="toggleSelectAll"
                 aria-label="Выбрать все"
               >
                 <component :is="headerSelectIcon" />
               </button>
 
-              <p>{{ cell.text }}</p>
+              <p class="school-table__header-title">{{ cell.text }}</p>
 
-              <span class="sort-arrows">
+              <span class="school-table__sort-arrows">
                 <span :class="getArrowClass(cell.filter, 'asc')">
                   <IconArrowTop />
                 </span>
@@ -177,18 +178,19 @@ function toggleSelectAll() {
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="school-table__body">
         <tr
           v-for="(school, index) in sortedSchools"
           :key="index"
-          :class="{ 'placeholder-row': props.isLoading }"
+          class="school-table__row"
+          :class="{ 'school-table__row_state_placeholder': props.isLoading }"
         >
-          <td data-label="Регион">
-            <div class="region-cell">
+          <td data-label="Регион" class="school-table__cell">
+            <div class="school-table__region-cell">
               <button
                 v-if="!props.isLoading"
                 type="button"
-                class="select-icon"
+                class="school-table__select-icon"
                 @click.stop="toggleSelect(index)"
                 :aria-pressed="selectedSchools.has(index)"
                 aria-label="Выбрать школу"
@@ -196,13 +198,13 @@ function toggleSelectAll() {
                 <IconSelect v-if="selectedSchools.has(index)" />
                 <IconNoSelect v-else />
               </button>
-              <p>{{ school.region || '\u00A0' }}</p>
+              <p class="school-table__text">{{ school.region || '\u00A0' }}</p>
             </div>
           </td>
-          <td data-label="Название">{{ school.name || '\u00A0' }}</td>
-          <td data-label="Адрес">{{ school.address || '\u00A0' }}</td>
-          <td data-label="Уровень образования">
-            <div class="table-bubble-wrapper">
+          <td data-label="Название" class="school-table__cell">{{ school.name || '\u00A0' }}</td>
+          <td data-label="Адрес" class="school-table__cell">{{ school.address || '\u00A0' }}</td>
+          <td data-label="Уровень образования" class="school-table__cell">
+            <div class="school-table__bubble-wrapper">
               <Bubble v-if="!props.isLoading" :school-lvls="school.lvls" />
             </div>
           </td>
