@@ -186,9 +186,9 @@
 .placeholder-row {
   background: linear-gradient(
     90deg,
-    $color-placeholder,
-    $color-placeholder-light,
-    $color-placeholder
+    $color-bg-placeholder,
+    $color-bg-placeholder-light,
+    $color-bg-placeholder
   );
   background-size: 200%;
   animation: shimmer 1.5s infinite;

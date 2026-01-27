@@ -15,11 +15,6 @@
 .dp__range_end,
 .dp__range_start {
   border-radius: 0;
-  background-color: $color-dp-range-day;
-}
-
-.dp__range_between {
-  background-color: $color-dp-range-between;
 }
 
 .dp__action_buttons {
@@ -34,13 +29,22 @@
 .dp__input {
   padding: rem(16) rem(30) rem(16) rem(35);
   border-radius: 10px;
-
+  font-size: clamp(rem(14), 4vw, rem(16));
   transition: all 0.2s ease;
   border-color: $color-border-light;
+  height: 56px;
 
   &:hover:not(.dp__input_focus) {
     background-color: $color-bg-light-hover;
   }
+}
+
+// Переопределение placeholder
+.dp__input::placeholder {
+  color: $color-text-medium !important;
+  font-size: clamp(rem(15), 4vw, rem(17)) !important;
+  font-family: inherit !important;
+  opacity: 1 !important;
 }
 
 .dp__date_hover:hover {

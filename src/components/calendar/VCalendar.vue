@@ -34,9 +34,12 @@ const internalValue = computed({
     :formats="{ input: 'dd MMMM yyyy' }"
     model-type="yyyy-MM-dd"
     auto-apply
+    :placeholder="'Выберите дату обновления'"
   />
 </template>
 
 <style lang="scss">
 @use './VCalendar.scss' as *;
 </style>
+
+<style scoped></style>

@@ -33,8 +33,8 @@ function selectOption(option) {
 <template>
   <div class="custom-select" :class="{ 'is-open': isOpen }">
     <div class="select-trigger" @click="isOpen = !isOpen">
-      <span class="select-value">
-        {{ selectedTitle || placeholder }}
+      <span :class="['select-value', props.modelValue === null ? 'select-placeholder' : '']">
+        {{ props.modelValue !== null ? selectedTitle : placeholder }}
       </span>
       <span class="select-arrow"><IconArrowSelect /></span>
     </div>

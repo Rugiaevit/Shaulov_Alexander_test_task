@@ -2,9 +2,9 @@
 @use '@/styles/function.scss' as *;
 
 .custom-select {
+  font-family: inherit;
   position: relative;
   width: 100%;
-  height: 56px;
 
   .select-trigger {
     display: flex;
@@ -18,7 +18,7 @@
     font-size: clamp(rem(14), 4vw, rem(16));
     color: $color-text-dark;
     user-select: none;
-    height: calc(56px - 32px);
+    height: calc(56px - 34px); // 34px = 2 * 16(padding) + 2 * 1(border)
     transition: all 0.2s ease;
 
     &:hover {
@@ -31,6 +31,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     flex-grow: 1;
+  }
+
+  .select-placeholder {
+    color: $color-text-medium;
   }
 
   .select-arrow {
