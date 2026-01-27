@@ -64,15 +64,12 @@ const pages = computed(() => {
   return items
 })
 
-// PS количество записей на одной странице может быть 36,
-// при запросе на одну страницу более 36 выдавало ошибку 500
-// по этому будем делатьградацию
-
 const printCount = [
-  { value: 9, title: '9' },
-  { value: 18, title: '18' },
-  { value: 27, title: '27' },
-  { value: 36, title: '36' },
+  { value: 10, title: '10' },
+  { value: 20, title: '20' },
+  { value: 30, title: '30' },
+  { value: 40, title: '40' },
+  { value: 50, title: '50' },
 ]
 
 //  @update:model-value="$emit('update:pageSize', $event)" - связка между App.vue и VPaginationSelect.vue,

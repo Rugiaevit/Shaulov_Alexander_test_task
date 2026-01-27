@@ -4,7 +4,7 @@ const client = new ApiClient('/api')
 
 export async function fetchFromApiSchools(params = {}) {
   const {
-    count = 9,
+    count = 10,
     page = 1,
     federal_district_id = null,
     region_id = null,

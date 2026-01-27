@@ -22,7 +22,7 @@ const isLoading = ref(true)
 const error = ref(null)
 
 const currentPage = ref(1)
-const pageSize = ref(9)
+const pageSize = ref(10)
 
 async function loadData() {
   isLoading.value = true
@@ -75,7 +75,7 @@ onMounted(() => {
 // PS для себя: watch аналог useEffect(() => {...},[i]); при монтировании
 watch([federalDistrictValue, regionValue, updatedAt], () => {
   currentPage.value = 1
-  pageSize.value = 9
+  pageSize.value = 10
 })
 
 watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loadSchools)

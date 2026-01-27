@@ -22,7 +22,7 @@ const props = defineProps({
 })
 
 // функция для создания заглушки на таблицу
-function createPlaceholderData(count = 9) {
+function createPlaceholderData(count = 10) {
   return Array.from({ length: count }, () => ({
     region: '',
     name: '',
@@ -37,7 +37,7 @@ const sortOrder = ref('asc') // 'asc' | 'desc'
 
 // Вычисляемый отсортированный список
 const sortedSchools = computed(() => {
-  if (props.isLoading) return createPlaceholderData(9)
+  if (props.isLoading) return createPlaceholderData(10)
 
   if (!sortBy.value) return props.schools
 
