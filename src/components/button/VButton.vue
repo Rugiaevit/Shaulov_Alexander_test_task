@@ -1,7 +1,10 @@
 <script setup>
+import IconSave from '../icons/VIconSave.vue'
+
 defineProps({
   disabled: { type: Boolean, default: false },
   btnType: { type: String, default: undefined },
+  save: { type: Boolean, default: false },
 })
 
 defineEmits(['click'])
@@ -13,7 +16,8 @@ defineEmits(['click'])
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
-    <slot></slot>
+    <span v-if="save" class="btn-icon"><IconSave /></span
+    ><span class="btn-text"><slot></slot></span>
   </button>
 </template>
 

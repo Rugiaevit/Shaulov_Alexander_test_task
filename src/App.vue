@@ -1,11 +1,10 @@
 <script setup>
-// src\App.vue
 import { ref, onMounted, watch } from 'vue'
 import VTable from '@/components/table/VTable.vue'
 import VFilter from '@/components/filter/VFilter.vue'
 import VHeader from '@/components/header/VHeader.vue'
 import VPagination from '@/components/pagination/VPagination.vue'
-import VPageError from '@/components/404/VPageError.vue'
+import VPageError from '@/components/error/VPageError.vue'
 
 import { fetchFromApiRegions } from '@/core/api-regions.js'
 import { fetchFromApiFederalDistricts } from '@/core/api-federal-districts.js'
@@ -14,7 +13,7 @@ import { fetchFromApiSchools } from '@/core/api-schools.js'
 const regions = ref([])
 const federalDistricts = ref([])
 const schools = ref([])
-const totalPage = ref([])
+const totalPages = ref(1)
 
 const regionValue = ref(null)
 const federalDistrictValue = ref(null)
@@ -40,7 +39,7 @@ async function loadData() {
     regions.value = regionsData
     federalDistricts.value = districtsData
     schools.value = schoolsData.schools
-    totalPage.value = schoolsData.pages_count
+    totalPages.value = schoolsData.pages_count
   } catch (err) {
     error.value = err.message
   } finally {
@@ -59,7 +58,7 @@ async function loadSchools() {
       updated_at: updatedAt.value,
     })
     schools.value = schoolsData.schools
-    totalPage.value = schoolsData.pages_count
+    totalPages.value = schoolsData.pages_count
   } catch (err) {
     error.value = err.message
   } finally {
@@ -83,23 +82,25 @@ watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loa
 </script>
 
 <template>
-  <div class="school-table">
-    <VHeader />
-    <VFilter
-      v-model:regionValue="regionValue"
-      v-model:federalDistrictValue="federalDistrictValue"
-      v-model:updatedAt="updatedAt"
-      :regions="regions"
-      :federal-districts="federalDistricts"
-    />
-    <VTable :schools="schools" :is-loading="isLoading" />
-    <VPagination
-      v-model:currentPage="currentPage"
-      v-model:pageSize="pageSize"
-      :total-pages="totalPage"
-    />
+  <div>
+    <div class="school-table">
+      <VHeader />
+      <VFilter
+        v-model:regionValue="regionValue"
+        v-model:federalDistrictValue="federalDistrictValue"
+        v-model:updatedAt="updatedAt"
+        :regions="regions"
+        :federal-districts="federalDistricts"
+      />
+      <VTable :schools="schools" :is-loading="isLoading" />
+      <VPagination
+        v-model:currentPage="currentPage"
+        v-model:pageSize="pageSize"
+        :total-pages="totalPages"
+      />
+    </div>
+    <VPageError v-if="error" :error="error" />
   </div>
-  <VPageError v-if="error" :error="error" />
 </template>
 
 <style lang="scss">

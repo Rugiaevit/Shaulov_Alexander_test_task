@@ -16,13 +16,15 @@
     background-color: white;
     cursor: pointer;
     font-size: clamp(rem(14), 4vw, rem(16));
+    font-weight: 400;
+    font-family: inherit;
     color: $color-text-dark;
     user-select: none;
     height: calc(56px - 34px); // 34px = 2 * 16(padding) + 2 * 1(border)
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: $color-bg-light-hover;
+      background-color: $color-dropdown-bg-hover;
     }
   }
 
@@ -34,7 +36,7 @@
   }
 
   .select-placeholder {
-    color: $color-text-medium;
+    color: $color-dropdown-text-placeholder;
   }
 
   .select-arrow {
@@ -44,33 +46,33 @@
   }
 
   .select-dropdown {
+    padding: rem(6);
     position: absolute;
     top: 60px;
     left: 0;
     right: 0;
-    background: white;
-    border: 1px solid #ddd;
+    background: $color-dropdown-items-bg;
     border-radius: 10px;
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
     margin: 0;
-    padding: 0;
     list-style: none;
 
     .select-option {
-      padding: rem(16);
+      border-radius: 8px;
+      padding: rem(10) rem(16);
       cursor: pointer;
-      color: #333;
+      background-color: $color-dropdown-item-bg;
       font-size: clamp(rem(14), 4vw, rem(16));
+      margin-bottom: 1px;
 
       &:hover {
-        background-color: $color-bg-light-hover;
+        background-color: $color-dropdown-item-bg-hover;
       }
 
       &.is-selected {
-        background-color: $color-bg-light-hover;
-        font-weight: 500;
+        background-color: $color-dropdown-item-bg-hover;
       }
     }
   }

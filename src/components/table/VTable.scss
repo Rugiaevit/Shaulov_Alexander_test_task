@@ -13,7 +13,7 @@
     position: relative;
     width: 100%;
     border-collapse: collapse; // отключает дефолтный отступ между ячейками
-    font-size: clamp(rem(14), 2.5vw, rem(16));
+
     color: $color-text-dark;
     overflow: hidden;
     border: none;
@@ -30,11 +30,13 @@
 
   thead {
     background-color: $color-bg-light;
+    font-size: clamp(rem(14), 2.5vw, rem(16));
     position: sticky;
     top: 0;
+    font-style: bold;
+    font-weight: 700;
 
     th {
-      font-weight: 600;
       cursor: pointer;
       user-select: none;
       transition: background-color 0.2s;
@@ -71,11 +73,13 @@
   }
 
   tbody tr {
+    font-size: clamp(rem(12), 2.5vw, rem(14));
     transition: background-color 0.2s;
     border-bottom: 1px solid #0e0e101a;
     position: relative;
 
     td {
+      font-weight: 400;
       font-size: clamp(rem(12), 2.5vw, rem(14));
       height: auto;
       white-space: normal;
@@ -237,7 +241,6 @@
 
     &::before {
       content: attr(data-label) ':';
-      font-weight: 600;
       color: $color-text-dark;
       font-size: rem(13);
       line-height: 1.3;

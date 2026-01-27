@@ -33,6 +33,7 @@
   transition: all 0.2s ease;
   border-color: $color-border-light;
   height: 56px;
+  font-family: inherit !important;
 
   &:hover:not(.dp__input_focus) {
     background-color: $color-bg-light-hover;
@@ -41,9 +42,10 @@
 
 // Переопределение placeholder
 .dp__input::placeholder {
-  color: $color-text-medium !important;
-  font-size: clamp(rem(15), 4vw, rem(17)) !important;
+  color: $color-dropdown-text-placeholder !important;
   font-family: inherit !important;
+  font-size: clamp(rem(15), 4vw, rem(17)) !important;
+  font-weight: 400 !important;
   opacity: 1 !important;
 }
 

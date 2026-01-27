@@ -20,6 +20,13 @@
   font-weight: 600;
   background-color: transparent;
   border: 1px solid $color-border-dark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-icon {
+    margin-right: rem(11);
+  }
 
   &--primary {
     @include ms.button($color-primary, $color-text-light, $color-primary);

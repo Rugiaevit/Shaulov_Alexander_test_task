@@ -5,7 +5,7 @@ import VButton from '../button/VButton.vue'
   <div class="header">
     <h1 class="header-title">Таблица учреждений</h1>
     <div class="header-control">
-      <VButton btn-type="accent" @click="submit">Скачать</VButton>
+      <VButton btn-type="accent" :save="true">Скачать</VButton>
     </div>
   </div>
 </template>

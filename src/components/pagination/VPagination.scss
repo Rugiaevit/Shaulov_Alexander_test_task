@@ -4,6 +4,7 @@
 
 .pagination {
   @include ms.flex-row-space-between();
+  font-size: clamp(rem(10), 4vw, rem(12));
 
   &-page-control {
     @include ms.flex-row-space-between();
@@ -39,19 +40,18 @@
     text-align: center;
     line-height: 1.5;
     border-radius: 10px;
-    padding: rem(5) rem(15);
+    padding: rem(10) rem(15);
 
     &:hover {
-      background-color: $color-bg-light-hover;
+      background-color: $color-pagination-bg-hover;
     }
 
     &--active {
-      font-weight: 600;
-      background-color: $color-bg-light-alt;
+      background-color: $color-pagination-bg-active;
     }
 
     @include ms.respond-down-to(sm) {
-      padding: rem(5) rem(7);
+      padding: rem(10) rem(15);
     }
   }
 

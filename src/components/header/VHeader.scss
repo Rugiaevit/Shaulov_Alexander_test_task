@@ -9,6 +9,8 @@
   &-title {
     line-height: 1.2;
     font-size: clamp(rem(24), 2.5vw, rem(32));
+    font-style: normal;
+    font-weight: 700;
     @include ms.respond-down-to(xs) {
       text-align: center;
     }

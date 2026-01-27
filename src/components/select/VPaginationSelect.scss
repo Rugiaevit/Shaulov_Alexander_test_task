@@ -5,6 +5,7 @@
   position: relative;
   width: 100%;
   height: 36px;
+  min-width: 73px;
 
   .select-pagination-trigger {
     display: flex;
@@ -15,14 +16,14 @@
     border-radius: 10px;
     background-color: white;
     cursor: pointer;
-    font-size: clamp(rem(14), 4vw, rem(16));
+    font-size: clamp(rem(10), 4vw, rem(12));
     color: $color-text-dark;
     user-select: none;
     height: calc(36px - 20px);
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: $color-bg-light-hover;
+      background-color: $color-dropdown-bg-hover;
     }
   }
 
@@ -44,30 +45,30 @@
     top: 40px;
     left: 0;
     right: 0;
-    background: white;
+    background: $color-dropdown-items-bg;
     border: 1px solid #ddd;
     border-radius: 10px;
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
     margin: 0;
-    padding: 0;
+    padding: rem(6);
     list-style: none;
 
     .select-pagination-option {
-      text-align: center;
-      padding: rem(16);
+      border-radius: 8px;
+      padding: rem(10) rem(16);
       cursor: pointer;
-      color: #333;
-      font-size: clamp(rem(14), 4vw, rem(16));
+      background-color: $color-dropdown-item-bg;
+      font-size: clamp(rem(10), 4vw, rem(12));
+      margin-bottom: 1px;
 
       &:hover {
-        background-color: $color-bg-light-hover;
+        background-color: $color-dropdown-item-bg-hover;
       }
 
       &.is-selected {
-        background-color: $color-bg-light-hover;
-        font-weight: 500;
+        background-color: $color-dropdown-item-bg-hover;
       }
     }
   }

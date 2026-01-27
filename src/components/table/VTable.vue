@@ -5,6 +5,7 @@ import IconArrowTop from '../icons/VIconArrowTop.vue'
 
 import IconNoSelect from '../icons/VIconNoSelect.vue'
 import IconSelect from '../icons/VIconSelect.vue'
+import IconNotAllSelect from '../icons/VIconNotAllSelect.vue'
 
 import Bubble from '@/components/bubble/VBubble.vue'
 
@@ -111,6 +112,33 @@ function toggleSelect(index) {
     selectedSchools.value.add(index)
   }
 }
+
+// Определяем, какую иконку показывать в шапке
+const headerSelectIcon = computed(() => {
+  if (props.isLoading) return IconNoSelect
+
+  const total = props.schools.length
+  const selected = selectedSchools.value.size
+
+  if (selected === 0) return IconNoSelect
+  if (selected === total) return IconSelect
+  return IconNotAllSelect
+})
+
+// Выбрать или снять все
+function toggleSelectAll() {
+  if (props.isLoading) return
+
+  const total = props.schools.length
+  const allSelected = selectedSchools.value.size === total
+
+  if (allSelected) {
+    selectedSchools.value.clear()
+  } else {
+    // Выбираем все
+    selectedSchools.value = new Set(Array.from({ length: total }, (_, i) => i))
+  }
+}
 </script>
 
 <template>
@@ -124,10 +152,26 @@ function toggleSelect(index) {
             @click="toggleSort(cell.filter)"
           >
             <div class="table-sell">
+              <!-- Иконка выбора только в первой колонке -->
+              <button
+                v-if="index === 0"
+                type="button"
+                class="select-icon"
+                @click.stop="toggleSelectAll"
+                aria-label="Выбрать все"
+              >
+                <component :is="headerSelectIcon" />
+              </button>
+
               <p>{{ cell.text }}</p>
+
               <span class="sort-arrows">
-                <span :class="getArrowClass(cell.filter, 'asc')"><IconArrowTop /></span>
-                <span :class="getArrowClass(cell.filter, 'desc')"><IconArrowBot /></span>
+                <span :class="getArrowClass(cell.filter, 'asc')">
+                  <IconArrowTop />
+                </span>
+                <span :class="getArrowClass(cell.filter, 'desc')">
+                  <IconArrowBot />
+                </span>
               </span>
             </div>
           </th>
