@@ -1,4 +1,5 @@
 <script setup>
+// объявление пропсов, похоже на TS
 defineProps({
   schoolLvls: {
     type: Array,

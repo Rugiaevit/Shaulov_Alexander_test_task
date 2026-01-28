@@ -3,6 +3,7 @@ import { ApiClient } from './api-client.js'
 const client = new ApiClient('/api')
 
 export async function fetchFromApiSchools(params = {}) {
+  // параметры для запроса с дефолтные значениями
   const {
     count = 10,
     page = 1,

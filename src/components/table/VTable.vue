@@ -9,6 +9,7 @@ import IconNotAllSelect from '../icons/VIconNotAllSelect.vue'
 
 import Bubble from '@/components/bubble/VBubble.vue'
 
+// объявление пропсов, похоже на TS
 const props = defineProps({
   schools: {
     type: Array,
@@ -82,6 +83,7 @@ function getArrowClass(field, order) {
   return 'arrow inactive'
 }
 
+// заголовки таблицы
 const tableHeaderCells = [
   {
     text: 'Регион',
@@ -102,7 +104,9 @@ const tableHeaderCells = [
 ]
 
 // Хранит индексы или уникальные ID выбранных школ
-const selectedSchools = ref(new Set()) // или ref([]), но Set удобнее
+// PS лучше использовать new Set() а не [], т.к. работает с <component :is="" />
+// и это лучше для хранения уникальных значений
+const selectedSchools = ref(new Set())
 
 // Функция переключения выбора
 function toggleSelect(index) {
@@ -140,6 +144,16 @@ function toggleSelectAll() {
     selectedSchools.value = new Set(Array.from({ length: total }, (_, i) => i))
   }
 }
+
+// PS @click.stop="" - останавливает ивент onClick, нужен чтобы клик срабатывал только
+// на конопке, а не на родительском элементе
+
+// PS помимо просто v-if="" также есть конструкция v-if="" + v-else
+// Пример:
+// <IconSelect v-if="selectedSchools.has(index)" />
+// <IconNoSelect v-else />
+// если не срабатывает v-if="selectedSchools.has(index)" то отрисуется элемент с v-else
+// PSS компоненты с v-if + v-else лучше писать рядом, но я не уверен
 </script>
 
 <template>

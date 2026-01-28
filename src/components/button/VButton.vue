@@ -1,13 +1,20 @@
 <script setup>
 import IconSave from '../icons/VIconSave.vue'
 
+// объявление пропсов, похоже на TS
 defineProps({
   disabled: { type: Boolean, default: false },
   btnType: { type: String, default: undefined },
   save: { type: Boolean, default: false },
 })
 
+// emit для обработки клика
 defineEmits(['click'])
+
+//PS @click="" привязка к ивенту onClick
+
+//PS :class="{ class-name : props.modelValue === null }" - условие для добавление класса
+//PSS чтобы не писать отдель class и :class можно занести через массив :class="['btn', btnType ? `btn--${btnType}` : null]"
 </script>
 
 <template>

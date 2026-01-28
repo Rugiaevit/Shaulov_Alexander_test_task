@@ -2,7 +2,6 @@
 @use '@/styles/variables.scss' as *;
 @use 'sass:map';
 
-// --------------Миксин для media запросов---------------
 @mixin respond-up-to($breakpoint) {
   // проверка $breakpoints
   // map.has-key - аналог Object.hasOwn(obj, key) из JS,
@@ -34,7 +33,6 @@
     @warn "Неизвестный брейкпоинт: #{$breakpoint}";
   }
 }
-//------------------------------------------------------
 
 @mixin button($bg, $text-color, $border-color) {
   background: $bg;

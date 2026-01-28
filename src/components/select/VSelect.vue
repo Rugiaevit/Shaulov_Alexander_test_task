@@ -2,26 +2,33 @@
 import { ref, computed } from 'vue'
 import IconArrowSelect from '../icons/VIconArrowSelect.vue'
 
+// объявление пропсов, похоже на TS
 const props = defineProps({
   modelValue: [String, Number, null],
   options: { type: Array, required: true },
   placeholder: { type: String, default: 'Выберите...' },
 })
 
+// PS emits - для обновления переданной переменной через v-model
 const emit = defineEmits(['update:modelValue'])
 
 const isOpen = ref(false)
 
 // находим текущий title по modelValue
+//PS computed - используется для вычеслений с реактивными (ref()) переменными
 const selectedTitle = computed(() => {
   const selected = props.options.find((opt) => opt.id === props.modelValue)
   return selected ? selected.title : ''
 })
 
 function selectOption(option) {
+  //PS обновление переменой переданной через v-model через emit
   emit('update:modelValue', option.id)
   isOpen.value = false
 }
+
+//PS :class="{ class-name : props.modelValue === null }" - условие для добавление класса
+//PS @click="" привязка к ивенту onClick
 </script>
 
 <template>

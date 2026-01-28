@@ -1,10 +1,12 @@
 <script setup>
 import { watch, onUnmounted } from 'vue'
 
+//PS объявление пропсов, похоже на TS
 const props = defineProps({
   error: { type: String, default: undefined },
 })
 
+// watch аналог useEffect(() => {...},[i]);
 watch(
   () => props.error,
   (newError) => {
@@ -14,6 +16,7 @@ watch(
 )
 
 // сбросить overflow при размонтировании
+// onMounted аналог useEffect(() => {...},[]);
 onUnmounted(() => {
   document.body.style.overflow = ''
 })

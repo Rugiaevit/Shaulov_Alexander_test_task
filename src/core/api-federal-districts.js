@@ -8,7 +8,8 @@ export async function fetchFromApiFederalDistricts() {
   // Извлекаем массив федеральных округов
   const federalDistricts = response.data || []
 
-  // Преобразуем в нужный формат и добавляем "Не выбрано"
+  // Преобразуем в нужный формат и добавляем первым элементом "Не выбрано"
+  // формат = [{id: 1, title:'title1'}, {id: 2, title:'title2'}, ...]
   const formatted = [
     { id: null, title: 'Не выбрано' },
     ...federalDistricts.map((item) => ({

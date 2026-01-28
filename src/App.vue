@@ -10,6 +10,7 @@ import { fetchFromApiRegions } from '@/core/api-regions.js'
 import { fetchFromApiFederalDistricts } from '@/core/api-federal-districts.js'
 import { fetchFromApiSchools } from '@/core/api-schools.js'
 
+// // PS для себя: ref() - аналог useState()
 const regions = ref([])
 const federalDistricts = ref([])
 const schools = ref([])
@@ -73,12 +74,20 @@ onMounted(() => {
 })
 
 // PS для себя: watch аналог useEffect(() => {...},[i]); при монтировании
+// зависимости пишутся спереди просто переменной или массивом переменных
 watch([federalDistrictValue, regionValue, updatedAt], () => {
   currentPage.value = 1
   pageSize.value = 10
 })
 
 watch([currentPage, pageSize, federalDistrictValue, regionValue, updatedAt], loadSchools)
+
+// PS по шаблону
+// пропсы передаются через : , :regions="regions" - такой пропс просто передает данные в компонент
+// если пропс передается через v-model, то такой пропас должен изменяться в компоненте
+// v-if="" - условие отрисовки компонента <VPageError v-if="error" :error="error" /> - если error !== null/undefined
+
+//TODO: ДОделать сопроводительные коментарии и сделать сопроводительный документ, сдать работу
 </script>
 
 <template>
